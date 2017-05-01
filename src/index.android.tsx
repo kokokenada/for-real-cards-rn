@@ -11,13 +11,15 @@ import {
   Text,
   View
 } from 'react-native';
+interface Props { }
+interface State { }
 
-export default class AwesomeProject extends Component {
+export default class ForRealCards extends Component<Props, State> {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native! OK?
+          Welcome to React Native! Wow?
         </Text>
         <Text style={styles.instructions}>
           To get started, edit index.android.js
@@ -31,7 +33,7 @@ export default class AwesomeProject extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles: any = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -50,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+AppRegistry.registerComponent('ForRealCards', () => ForRealCards);

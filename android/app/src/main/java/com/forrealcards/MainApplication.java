@@ -1,4 +1,4 @@
-package com.awesomeproject;
+package com.forrealcards;
 
 import android.app.Application;
 
@@ -24,6 +24,11 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage()
       );
+    }
+
+  @Override
+    protected String getJSMainModuleName() {
+      return "artifacts/index.android";
     }
   };
 

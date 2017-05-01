@@ -1,11 +1,18 @@
 {
-  "name": "For Real Cards (React Native Client)",
+  "name": "for-real-cards-rn",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "meteor-bundle-client": "meteor-client bundle",
-    "test": "jest"
+    "test": "jest --coverage",
+    "tsc": "tsc",
+    "clean": "rimraf artifacts",
+    "build": "npm run clean && npm run tsc --",
+    "lint": "tslint src/**/*.ts",
+    "watch": "npm run build -- -w",
+    "start:ios": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios'",
+    "start:android": "npm run build && concurrently -r 'npm run watch' 'react-native run-android'"
   },
   "dependencies": {
     "meteor-node-stubs": "^0.2.6",
@@ -15,13 +22,31 @@
     "react-native": "0.44.0"
   },
   "devDependencies": {
+    "@types/jest": "^19.2.2",
+    "@types/react": "^15.0.23",
+    "@types/react-native": "^0.43.7",
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
+    "concurrently": "^3.4.0",
     "jest": "19.0.2",
     "meteor-client-bundler": "^0.2.0",
-    "react-test-renderer": "16.0.0-alpha.6"
+    "react-test-renderer": "16.0.0-alpha.6",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.1.0",
+    "typescript": "^2.3.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "testRegex": "artifacts/.+\\.(test|spec).js$",
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text-summary",
+      "html"
+    ],
+    "collectCoverageFrom": [
+      "artifacts/**/*.js",
+      "!artifacts/**/*.spec.js",
+      "!artifacts/**/*.index.js"
+    ]
   }
 }
