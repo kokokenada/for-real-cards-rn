@@ -1,0 +1,11 @@
+{
+  "runtime": {
+    "DDP_DEFAULT_CONNECTION_URL": "http://localhost:3000"
+  },
+  "import": [
+    "meteor-base@1.0.4",
+    "accounts-password@1.3.5",
+    "jalik:ufs@0.7.1_1",
+    "jalik:ufs-gridfs@0.1.4"
+  ]
+}
