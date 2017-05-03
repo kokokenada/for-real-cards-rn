@@ -1,10 +1,10 @@
 import 'react-native'
-import Index from './index.ios'
+import { App } from './app'
 import React from 'react'
 import renderer from 'react-test-renderer'
 it('renders correctly', () => {
   const tree = renderer.create(
-    <Index />
+    <App />
   );
   expect(tree).toBeDefined()
 });
