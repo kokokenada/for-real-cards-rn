@@ -1,27 +1,37 @@
 import React, {Component} from 'react';
-import {TextInput, View, StyleSheet, Image} from 'react-native';
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableOpacity}
+from 'react-native';
 
 
 interface Props { }
 interface State {
-  id: string
+
 }
 
 const personIcon = require("../../../src/features/start/login1_person.png");
 
 export default class Register extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      id: ''
-    }
+  state = {
+    id: '',
+    password: '',
   }
 
-  idChange(text) {
-    this.setState({ id: text })
+  idChange(id) {
+    this.setState({ id })
+  }
+
+  passwordChange(password) {
+    this.setState({ password })
   }
 
   render() {
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
           <View style={styles.wrapper}>
@@ -30,6 +40,7 @@ export default class Register extends Component<Props, State> {
                 <Image source={personIcon} style={styles.icon} resizeMode="contain" />
               </View>
               <TextInput
+                name='id'
                 placeholder='Username'
                 placeholderTextColor="#FFF"
                 style={styles.input}
@@ -37,6 +48,29 @@ export default class Register extends Component<Props, State> {
                 onChangeText={text => this.idChange(text)}
               />
             </View>
+            <View style={styles.inputWrap}>
+              <View style={styles.iconWrap}>
+                <Image source={personIcon} style={styles.icon} resizeMode="contain" />
+              </View>
+              <TextInput
+                placeholder='Password'
+                placeholderTextColor="#FFF"
+                style={styles.input}
+                value={this.state.password}
+                onChangeText={text => this.passwordChange(text)}
+                secureTextEntry
+              />
+            </View>
+            <TouchableOpacity activeOpacity={.5}>
+              <View style={styles.button}>
+                <Text onPress={() => navigate('Login')} style={styles.buttonText}>Sign In</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={.5}>
+              <View style={styles.button}>
+                <Text onPress={() => navigate('Home')} style={styles.buttonText}>Home</Text>
+              </View>
+            </TouchableOpacity>
           </View>
       </View>
     )
@@ -63,7 +97,7 @@ const styles = StyleSheet.create({
   },
   inputWrap: {
     flexDirection: "row",
-    marginVertical: 10,
+    marginVertical: 5,
     height: 40,
     borderBottomWidth: 1,
     borderBottomColor: "#CCC"
@@ -71,7 +105,11 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     paddingBottom: 20,
-    marginTop: 20,
-    // alignSelf: 'center'
+    marginTop: 15,
+    height: 40,
+  },
+  buttonText: {
+    color: "#FFF",
+    fontSize: 18,
   },
 })
