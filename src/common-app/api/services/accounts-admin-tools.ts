@@ -3,6 +3,9 @@
  */
 import 'meteor-client';
 import { User} from '../../api';
+import { _ } from 'underscore';
+
+declare let Roles;
 
 import { PagingTools, FilterDefinition} from "./page-tools"
 

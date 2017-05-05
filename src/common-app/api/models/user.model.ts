@@ -1,4 +1,5 @@
 import 'meteor-client';
+import { _ } from 'underscore';
 
 export class User {
 
