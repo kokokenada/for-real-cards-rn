@@ -30,6 +30,10 @@ class HomeScreen extends React.Component<Props, State> {
     onPress={() => navigate('Login')}
     title="Login"
   />
+  <Button
+    onPress={() => navigate('Register')}
+    title='Register'
+  />
 </View>
 
     );
