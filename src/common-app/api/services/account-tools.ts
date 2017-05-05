@@ -1,4 +1,4 @@
-import Meteor from 'react-native-meteor';
+import Meteor from 'meteor-client';
 
 import {User} from '../../api';
 

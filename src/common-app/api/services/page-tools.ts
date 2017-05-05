@@ -2,7 +2,7 @@
  * Created by kenono on 2016-05-02.
  */
 
-import { check, Match } from 'react-native-meteor';
+import { check, Match } from 'meteor-client';
 
 export interface FilterDefinition {
   filter: string,

@@ -1,6 +1,6 @@
 
 import { User } from '../../api';
-import { _ } from 'react-native-meteor';
+import { _ } from 'meteor-client';
 
 export interface MenuItemDefintion {
   id:string;

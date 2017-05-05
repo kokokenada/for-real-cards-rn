@@ -54,3 +54,5 @@ fastlane/screenshots
 
 artifacts/
 coverage/
+
+native-packages

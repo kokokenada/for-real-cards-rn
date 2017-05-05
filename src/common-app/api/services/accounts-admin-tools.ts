@@ -1,7 +1,7 @@
 /**
  * Created by kenono on 2016-05-01.
  */
-import Meteor, { Mongo, Roles, _ } from 'react-native-meteor';
+import Meteor, { Mongo, Roles, _ } from 'meteor-client';
 import { User} from '../../api';
 
 import { PagingTools, FilterDefinition} from "./page-tools"

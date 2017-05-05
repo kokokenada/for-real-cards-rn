@@ -1,4 +1,4 @@
-import Meteor, { Accounts, Mongo } from 'react-native-meteor';
+import { Meteor, Accounts, Mongo } from 'meteor-client';
 import { Observable } from 'rxjs';
 
 import {Credentials} from "../../api/services/credentials";
@@ -123,6 +123,9 @@ export class LoginService {
 
   static watchCurrentUser():Promise<IPayloadAction> {
     return new Promise((resolve, reject)=>{
+
+      console.log(Meteor);
+
       Meteor.subscribe('user-edit', {reactive: true}, {
         onReady: ()=> {
           resolve(LoginActions.watchedUserFirstReadFactory(LoginService.user())); // Copy Current User

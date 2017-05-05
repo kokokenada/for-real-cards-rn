@@ -1,5 +1,5 @@
 import { Observable, Subscriber } from 'rxjs';
-import { Meteor, Mongo } from 'react-native-meteor';
+import { Meteor, Mongo } from 'meteor-client';
 
 import {EDocumentChangeType, IDocumentChange} from './document-change.interface';
 

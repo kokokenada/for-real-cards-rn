@@ -1,4 +1,4 @@
-import Meteor, { Accounts } from 'react-native-meteor'
+import { Meteor, Accounts } from 'meteor-client'
 import _ from 'underscore';
 
 export class User {

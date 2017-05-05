@@ -2,7 +2,7 @@
  * Created by kenono on 2016-04-16.
  */
 
-import { _ } from 'react-native-meteor';
+import { _ } from 'meteor-client';
 import { MenuItem, MenuItemDefintion } from "./menu-item";
 
 export class Menus {
