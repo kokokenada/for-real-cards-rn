@@ -14,6 +14,33 @@ if (isProdBuild) {
   }));
 }
 
+//https://gist.github.com/pilwon/7a57624ddde9e6a3bd06
+//https://gist.github.com/alexesDev/071f8935c82ca87a5b46
+var reactNativeExternalsPromise = (function () {
+  var reactNativeRoot = path.dirname(require.resolve('react-native/package'));
+  var blacklist = require('react-native/packager/blacklist');
+  var ReactPackager = require('react-native/packager/react-packager');
+  var reactNativePackage = require('react-native/package');
+
+  return ReactPackager.getDependencies({
+    assetRoots: [reactNativeRoot],
+    blacklistRE: blacklist(false),
+    projectRoots: [reactNativeRoot],
+    transformModulePath: require.resolve('react-native/packager/transformer')
+  }, reactNativePackage.main)
+    .then(function (dependencies) {
+      return dependencies.filter(function (dependency) {
+        return !dependency.isPolyfill;
+      });
+    })
+    .then(function (dependencies) {
+      return dependencies.map(function (dependency) {
+        return dependency.id;
+      });
+    });
+}());
+
+
 module.exports = {
 //  context: path.join(__dirname, ''),
   entry: {
@@ -29,6 +56,17 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
+  externals: [
+    function (context, request, cb) {
+      reactNativeExternalsPromise.then(function (reactNativeExternals) {
+        if (['react-native'].concat(reactNativeExternals).indexOf(request) != -1) {
+          cb(null, request);
+        } else {
+          cb();
+        }
+      });
+    }
+  ],
 
   // Source maps support ('inline-source-map' also works)
   // devtool: 'source-map',
@@ -37,7 +75,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.tsx?$/,
+        test: /\.(tsx|ts)?$/,
         loader: 'awesome-typescript-loader',
         exclude: [/node_modules/],
 //        include: ['src/*.ts']
@@ -45,7 +83,10 @@ module.exports = {
       {
         test: /\.(png|jpg)$/,
         loader: 'file-loader'
-      }
+      },
+
+      {test: /\.js$/, loader: 'babel?blacklist[]=react', exclude: /node_modules\//},
+      {test: /\.jsx$/, loader: 'imports?React=react-native!babel'}
     ]
   },
   plugins: plugins,
