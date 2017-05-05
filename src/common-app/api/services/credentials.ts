@@ -9,14 +9,16 @@ export class Credentials {
 
   }
   saveCredentials() {
-    if (this.email && this.email.length>0)
-      localStorage.setItem("account-tools.last_email", this.email);
-    else
-      localStorage.removeItem("account-tools.last_email");
-    if (this.username && this.username.length>0)
-      localStorage.setItem("account-tools.last_username", this.username);
-    else
-      localStorage.removeItem("account-tools.last_username");
+    if (typeof localStorage !== 'undefined') {
+      if (this.email && this.email.length>0)
+        localStorage.setItem("account-tools.last_email", this.email);
+      else
+        localStorage.removeItem("account-tools.last_email");
+      if (this.username && this.username.length>0)
+        localStorage.setItem("account-tools.last_username", this.username);
+      else
+        localStorage.removeItem("account-tools.last_username");
+    }
   }
   
   private static cleanValue(key:string):string {

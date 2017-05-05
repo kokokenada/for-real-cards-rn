@@ -1,4 +1,4 @@
-import Meteor from 'meteor-client';
+import 'meteor-client';
 
 import {User} from '../../api';
 

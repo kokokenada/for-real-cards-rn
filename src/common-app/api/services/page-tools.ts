@@ -2,7 +2,7 @@
  * Created by kenono on 2016-05-02.
  */
 
-import { check, Match } from 'meteor-client';
+import 'meteor-client';
 
 export interface FilterDefinition {
   filter: string,

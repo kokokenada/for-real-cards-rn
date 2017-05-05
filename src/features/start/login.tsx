@@ -17,18 +17,14 @@ const personIcon = require("../../../src/features/start/login1_person.png");
 const lockIcon = require("../../../src/features/start/login1_lock.png");
 
 export default class Login extends Component<Props, State> {
-  _that;
+
   constructor(props) {
     super(props);
     this.state = {id: '', email: '', password: ''};
-    this._that = this;
-/*    this.setState({id: ''});
-    this.setState({password: ''});
-    this.setState({email: ''});*/
   }
 
-  idChange(event) {
-    this._that.setState({id: event.target.value});
+  idChange(text) {
+    this.setState({id: text});
   }
   login() {
     console.log("LOGIN");
@@ -54,7 +50,7 @@ export default class Login extends Component<Props, State> {
                 placeholderTextColor="#FFF"
                 style={styles.input}
                 value={this.state.id}
-                onChange={this.idChange}
+                onChangeText={text => this.idChange(text)}
               />
             </View>
             <View style={styles.inputWrap}>
@@ -75,7 +71,7 @@ export default class Login extends Component<Props, State> {
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={.5}>
               <View style={styles.button}>
-                <Text onPress={this.login} style={styles.buttonText}>Sign In</Text>
+                <Text onPress={() => this.login()} style={styles.buttonText}>Sign In</Text>
               </View>
             </TouchableOpacity>
           </View>

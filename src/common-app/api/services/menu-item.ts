@@ -1,6 +1,6 @@
 
 import { User } from '../../api';
-import { _ } from 'meteor-client';
+import { _ } from 'underscore';
 
 export interface MenuItemDefintion {
   id:string;

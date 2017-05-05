@@ -1,4 +1,4 @@
-import { Meteor, Accounts, Mongo } from 'meteor-client';
+import 'meteor-client';
 import { Observable } from 'rxjs';
 
 import {Credentials} from "../../api/services/credentials";
@@ -142,7 +142,7 @@ export class LoginService {
 
   static createUserObserver(userId:string):Observable<IDocumentChange<User>>
   {
-    let users = Meteor.collection('users', {cursoredFind: true});
+    let users = Meteor.users;
     let cursor = users.find({_id: userId});
     console.log(cursor);
     return MeteorCursorObservers.fromMeteorCursor<User>(cursor);

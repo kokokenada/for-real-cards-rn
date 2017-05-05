@@ -1,5 +1,4 @@
-import { Meteor, Accounts } from 'meteor-client'
-import _ from 'underscore';
+import 'meteor-client';
 
 export class User {
 
