@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'react-native';
 import Image = Animated.Image;
+import {LoginActions} from '../../common-app/redux-packages/login/login-actions.class';
+import {Credentials} from '../../common-app/api/services/credentials';
 
 interface Props {
 }
 interface State {
+  id: string,
+  email: string,
+  password: string
 }
 
 const background = require("../../../src/features/start/background.jpg");
@@ -12,6 +17,29 @@ const personIcon = require("../../../src/features/start/login1_person.png");
 const lockIcon = require("../../../src/features/start/login1_lock.png");
 
 export default class Login extends Component<Props, State> {
+  _that;
+  constructor(props) {
+    super(props);
+    this.state = {id: '', email: '', password: ''};
+    this._that = this;
+/*    this.setState({id: ''});
+    this.setState({password: ''});
+    this.setState({email: ''});*/
+  }
+
+  idChange(event) {
+    this._that.setState({id: event.target.value});
+  }
+  login() {
+    console.log("LOGIN");
+    let credentials = new Credentials(
+      this.state.id,
+      this.state.email,
+      this.state.password
+    );
+    console.log(credentials);
+    LoginActions.login(credentials)
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -25,6 +53,8 @@ export default class Login extends Component<Props, State> {
                 placeholder="Username"
                 placeholderTextColor="#FFF"
                 style={styles.input}
+                value={this.state.id}
+                onChange={this.idChange}
               />
             </View>
             <View style={styles.inputWrap}>
@@ -45,7 +75,7 @@ export default class Login extends Component<Props, State> {
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={.5}>
               <View style={styles.button}>
-                <Text style={styles.buttonText}>Sign In</Text>
+                <Text onPress={this.login} style={styles.buttonText}>Sign In</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -119,7 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   forgotPasswordText: {
-    color: "#D8D8D8",
+    color: "powderblue",
     backgroundColor: "transparent",
     textAlign: "right",
     paddingRight: 15,
@@ -134,7 +164,7 @@ const styles = StyleSheet.create({
     color: "#D8D8D8"
   },
   signupLinkText: {
-    color: "#FFF",
+    color: "powderblue",
     marginLeft: 5,
   }
 });
