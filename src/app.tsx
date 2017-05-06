@@ -10,6 +10,7 @@ import Register from './features/start/register';
 import View = Animated.View;
 import {ReduxPackages} from './redux-packages';
 import {ReduxPackageCombiner} from './common-app';
+import 'meteor-client';
 
 export interface Props {
   navigation:any;
@@ -57,3 +58,7 @@ export class App extends Component<Props, State> {
     </Provider>
   )}
 }
+
+Meteor.startup(() => {
+  console.log('Meteor startup called');
+});
