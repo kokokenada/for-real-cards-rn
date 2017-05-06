@@ -50,7 +50,6 @@ class _Login extends Component<Props, State> {
   }
   render() {
     return (
-    <Provider store = {ReduxPackageCombiner.getStore()} >
       <View style={styles.container}>
         <Image source={background} style={styles.background} resizeMode="stretch" resizeMethod="resize">
           <View style={styles.wrapper}>
@@ -102,7 +101,6 @@ class _Login extends Component<Props, State> {
 
         </Image>
       </View>
-    </Provider>
     )
   }
 }
