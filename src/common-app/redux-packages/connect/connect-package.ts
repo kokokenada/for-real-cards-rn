@@ -4,7 +4,7 @@ import { ConnectAsync } from "./connect-async.class";
 import { ConnectActions } from "./connect-actions.class";
 
 export class ConnectPackage extends ReduxPackage<IAppState, IPayloadAction>  {
-  reducers=[{name:'connectReducer', reducer:connectReducer}];
+  reducers=[{name:'commonAppConnection', reducer:connectReducer}];
   actions = ConnectActions;
   constructor() {
     super();

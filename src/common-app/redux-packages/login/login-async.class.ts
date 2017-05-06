@@ -11,8 +11,8 @@ import {User} from '../../api';
 
 import {IDocumentChange} from "../../api";
 import {LoginActions} from "./login-actions.class";
-import {LoginService} from "./login.service";
-import {ILoginState} from "./login.types"
+import {LoginService} from "./login-service";
+import {ILoginState} from "./login-types"
 import {IAppStateCommonApp} from '../index';
 
 export class LoginAsync {

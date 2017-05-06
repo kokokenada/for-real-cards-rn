@@ -24,7 +24,7 @@ const personIcon = require("../../../src/features/start/login1_person.png");
 const lockIcon = require("../../../src/features/start/login1_lock.png");
 
 const mapStateToProps = (state) => {
-  const connection:IConnectState = state.connectReducer;
+  const connection:IConnectState = state.commonAppConnection;
   console.log('mapStateToProps');
   console.log(connection);
   return {
