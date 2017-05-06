@@ -9,9 +9,12 @@ import {
 from 'react-native';
 
 
-interface Props { }
+interface Props {
+  navigation: any
+}
 interface State {
-
+  id: string,
+  password: string
 }
 
 const personIcon = require("../../../src/features/start/login1_person.png");
@@ -40,7 +43,6 @@ export default class Register extends Component<Props, State> {
                 <Image source={personIcon} style={styles.icon} resizeMode="contain" />
               </View>
               <TextInput
-                name='id'
                 placeholder='Username'
                 placeholderTextColor="#FFF"
                 style={styles.input}
@@ -62,12 +64,12 @@ export default class Register extends Component<Props, State> {
               />
             </View>
             <TouchableOpacity activeOpacity={.5}>
-              <View style={styles.button}>
+              <View style={styles.buttonText}>
                 <Text onPress={() => navigate('Login')} style={styles.buttonText}>Sign In</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={.5}>
-              <View style={styles.button}>
+              <View style={styles.buttonText}>
                 <Text onPress={() => navigate('Home')} style={styles.buttonText}>Home</Text>
               </View>
             </TouchableOpacity>
