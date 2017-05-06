@@ -24,9 +24,17 @@ export interface ICombinerOptions {
 }
 
 export class ReduxPackageCombiner {
-  private static ngRedux;
+  private static _ngRedux;
+  private static _store;
+
   public static dispatch(action: IPayloadAction) {
-    ReduxPackageCombiner.ngRedux.dispatch(action);
+    ReduxPackageCombiner._ngRedux.dispatch(action);
+  }
+
+  public static getStore() {
+    console.log('getStore')
+    console.log(ReduxPackageCombiner._store)
+    return ReduxPackageCombiner._store;
   }
 
   private static configured = false;
@@ -67,7 +75,7 @@ export class ReduxPackageCombiner {
     if (!ngRedux) { // No ngRedux passed, use our internal dispatcher
       ngRedux = new Dispatcher<IAppState>();
     }
-    ReduxPackageCombiner.ngRedux = ngRedux;
+    ReduxPackageCombiner._ngRedux = ngRedux;
     modules.forEach((module: ReduxPackage<IAppState, IPayloadAction>)=> {
 
       module.reducers.forEach( (reducer:any)=>{
@@ -92,6 +100,10 @@ export class ReduxPackageCombiner {
     ngRedux.configureStore(rootReducer, {}, middlewares, enhancers);
     modules.forEach((module: ReduxPackage<IAppState, IPayloadAction>)=> {
       module.initialize();
-    })
+    });
+
+    if (ngRedux.getStore) {
+      ReduxPackageCombiner._store = ngRedux.getStore();
+    }
   }
 }

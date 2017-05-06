@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
+import { Provider } from 'react-redux';
 import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'react-native';
 import Image = Animated.Image;
 import {LoginActions} from '../../common-app/redux-packages/login/login-actions.class';
 import {Credentials} from '../../common-app/api/services/credentials';
+import { connect } from 'react-redux';
+import {ReduxPackageCombiner} from '../../common-app/redux-package/redux-package-combiner';
+import {IConnectRecord} from '../../common-app/redux-packages/connect/connect-types';
 
 interface Props {
 }
@@ -16,7 +20,17 @@ const background = require("../../../src/features/start/background.jpg");
 const personIcon = require("../../../src/features/start/login1_person.png");
 const lockIcon = require("../../../src/features/start/login1_lock.png");
 
-export default class Login extends Component<Props, State> {
+const mapStateToProps = (state) => {
+  const connection:IConnectRecord = state.connectReducer;
+  console.log('mapStateToProps');
+  console.log(connection.toJS());
+  return {
+    connection: connection.toJS()
+  }
+};
+
+
+class _Login extends Component<Props, State> {
 
   constructor(props) {
     super(props);
@@ -27,17 +41,16 @@ export default class Login extends Component<Props, State> {
     this.setState({id: text});
   }
   login() {
-    console.log("LOGIN");
     let credentials = new Credentials(
       this.state.id,
       this.state.email,
       this.state.password
     );
-    console.log(credentials);
     LoginActions.login(credentials)
   }
   render() {
     return (
+    <Provider store = {ReduxPackageCombiner.getStore()} >
       <View style={styles.container}>
         <Image source={background} style={styles.background} resizeMode="stretch" resizeMethod="resize">
           <View style={styles.wrapper}>
@@ -89,6 +102,7 @@ export default class Login extends Component<Props, State> {
 
         </Image>
       </View>
+    </Provider>
     )
   }
 }
@@ -164,3 +178,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   }
 });
+
+const Login = connect(mapStateToProps)(_Login);
+export default Login;

@@ -19,6 +19,9 @@ type RetypedCompose = (func: Function, ...funcs: Function[]) => Function;
  */
 export class Dispatcher<RootState> {
   private _store: Store<RootState> = null;
+  public getStore() {
+    return this._store;
+  }
 
   /**
    * configures a Redux store and allows NgRedux to observe and dispatch
