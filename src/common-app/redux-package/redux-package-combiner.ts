@@ -32,8 +32,6 @@ export class ReduxPackageCombiner {
   }
 
   public static getStore() {
-    console.log('getStore')
-    console.log(ReduxPackageCombiner._store)
     return ReduxPackageCombiner._store;
   }
 
