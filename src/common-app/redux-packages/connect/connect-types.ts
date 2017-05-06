@@ -1,4 +1,3 @@
-import {TypedRecord} from 'typed-immutable-record';
 
 export interface IConnectState {
   retryCount: number;
@@ -7,11 +6,15 @@ export interface IConnectState {
   serverURL: string;
 }
 
-export interface IConnectRecord extends TypedRecord<IConnectRecord>, IConnectState {}
-
 export interface IConnectActionPayload {
   serverURL: string;
 }
 
+export const INITIAL_STATE_CONNECT = {
+  connected: false,
+  connecting: false,
+  retryCount: 0,
+  serverURL: ""
+};
 
 

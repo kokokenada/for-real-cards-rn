@@ -2,18 +2,21 @@ import React, {Component} from 'react';
 import { Provider } from 'react-redux';
 import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'react-native';
 import Image = Animated.Image;
-import {LoginActions} from '../../common-app/redux-packages/login/login-actions.class';
-import {Credentials} from '../../common-app/api/services/credentials';
 import { connect } from 'react-redux';
-import {ReduxPackageCombiner} from '../../common-app/redux-package/redux-package-combiner';
-import {IConnectRecord} from '../../common-app/redux-packages/connect/connect-types';
+import {
+  Credentials,
+  IConnectState,
+  INITIAL_STATE_CONNECT,
+  LoginActions
+} from '../../common-app';
 
 interface Props {
 }
 interface State {
   id: string,
   email: string,
-  password: string
+  password: string,
+  connection: IConnectState
 }
 
 const background = require("../../../src/features/start/background.jpg");
@@ -21,11 +24,11 @@ const personIcon = require("../../../src/features/start/login1_person.png");
 const lockIcon = require("../../../src/features/start/login1_lock.png");
 
 const mapStateToProps = (state) => {
-  const connection:IConnectRecord = state.connectReducer;
+  const connection:IConnectState = state.connectReducer;
   console.log('mapStateToProps');
-  console.log(connection.toJS());
+  console.log(connection);
   return {
-    connection: connection.toJS()
+    connection: connection
   }
 };
 
@@ -34,7 +37,7 @@ class _Login extends Component<Props, State> {
 
   constructor(props) {
     super(props);
-    this.state = {id: '', email: '', password: ''};
+    this.state = {id: '', email: '', password: '', connection: INITIAL_STATE_CONNECT};
   }
 
   idChange(text) {
@@ -52,6 +55,8 @@ class _Login extends Component<Props, State> {
     return (
       <View style={styles.container}>
         <Image source={background} style={styles.background} resizeMode="stretch" resizeMethod="resize">
+          <Text>{ this.state.connection.connected ? "Connected" : "Not Connected" }</Text>
+          <Text>{ this.state.connection.serverURL }</Text>
           <View style={styles.wrapper}>
             <View style={styles.inputWrap}>
               <View style={styles.iconWrap}>
