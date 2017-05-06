@@ -51,6 +51,14 @@ export class ConnectService {
     console.info('Reconnecting: ' + display + ' Meteor.status(): ' + JSON.stringify(Meteor.status()));
     Meteor.connect(server.result);
     Meteor.reconnect();
+    fetch(server.result)
+      .then( (response) => {
+        console.log('Fetch returned data:');
+        console.log(response);
+      }, (error) => {
+        console.log('Fetch returned error:');
+        console.log(error);
+      })
   }
 
   static disconnect() {
