@@ -31,7 +31,7 @@ export class ReduxPackageCombiner {
     ReduxPackageCombiner._ngRedux.dispatch(action);
   }
 
-  public static getStore() {
+  public static getStore() { // Type???
     return ReduxPackageCombiner._store;
   }
 
@@ -49,6 +49,13 @@ export class ReduxPackageCombiner {
     return result;
   };
 
+  /**
+   * Configures passed modules and readies them for execution
+   *
+   * @param modules
+   * @param ngRedux - pass ngRedux if using it, null if using React
+   * @param options
+   */
   static configure(modules: ReduxPackage<IAppState, IPayloadAction>[],
             ngRedux,
             options: ICombinerOptions = {
