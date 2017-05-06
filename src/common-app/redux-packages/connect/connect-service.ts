@@ -12,9 +12,10 @@ export class ConnectService {
     return Meteor.status().connected;
   }
 
-  static getServerURL():string {
+  private static _getServerURL():{result: string, fromMeteor: boolean} {
     let result = '';
     let configured = '';
+    let fromMeteor = false;
     if (typeof __meteor_runtime_config__ === 'undefined') {
       console.warn(' __meteor_runtime_config__ is undefined')
     } else {
@@ -23,12 +24,15 @@ export class ConnectService {
     }
     try {
       result = Meteor.absoluteUrl();
+      fromMeteor = true;
     } catch (e) {
-      console.warn(e);
       result = configured;
-      console.warn('Using ' + configured);
     }
-    return result;
+    return {result, fromMeteor};
+  }
+
+  static getServerURL():string {
+    return ConnectService._getServerURL().result;
   }
 
   static setServerTo(app_url) {
@@ -42,7 +46,10 @@ export class ConnectService {
   }
 
   static reconnect() {
-    console.log('reconnecting')
+    let server = ConnectService._getServerURL();
+    let display = server.result + (server.fromMeteor ? ' (url calculated by meteor)' : ' (url from config)');
+    console.info('Reconnecting: ' + display + ' Meteor.status(): ' + JSON.stringify(Meteor.status()));
+    Meteor.connect(server.result);
     Meteor.reconnect();
   }
 
