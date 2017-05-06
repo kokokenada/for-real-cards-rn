@@ -58,8 +58,6 @@ export class Dispatcher<RootState> {
    * Dispatch an action to Redux
    */
   dispatch = <A extends Action>(action: A): any => {
-    console.log('dispatching')
-    console.log(action)
     if (!this._store) {
       throw new Error('Dispatch failed: did you forget to configure your store? ' +
         'https://github.com/angular-redux/@angular-redux/core/blob/master/' +
