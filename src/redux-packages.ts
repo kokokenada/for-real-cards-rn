@@ -1,10 +1,10 @@
-import {RP_LoginPackage, LoginActions, ReduxPackageCombiner} from './common-app';
-import 'redux';
+import {ConnectPackage, LoginPackage, LoginActions, ReduxPackageCombiner} from './common-app';
 
 export class ReduxPackages {
   constructor() {
     ReduxPackageCombiner.configure([
-        new RP_LoginPackage()
+        new LoginPackage(),
+        new ConnectPackage()
       ],
       null
     );

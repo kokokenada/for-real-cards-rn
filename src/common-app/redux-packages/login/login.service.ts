@@ -15,6 +15,7 @@ export class LoginService {
   static login(credentials:Credentials):Promise<IPayloadAction> {
     return new Promise((resolve, reject)=>{
       credentials.saveCredentials();
+      console.log(Meteor);
       Meteor.loginWithPassword(
         credentials.email ? credentials.email : credentials.username, credentials.password,
         (error)=> {

@@ -5,7 +5,7 @@ import { LoginAsync } from "./login-async.class";
 import { LoginActions } from "./login-actions.class";
 import { ILoginState } from './index';
 
-export class RP_LoginPackage extends ReduxPackage<IAppState, IPayloadAction>  {
+export class LoginPackage extends ReduxPackage<IAppState, IPayloadAction>  {
   reducers=[{name:'loginReducer', reducer:loginReducer}];
   action = LoginActions;
   constructor() {
