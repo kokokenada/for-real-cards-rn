@@ -21,7 +21,7 @@ export function connectReducer(
         retryCount: 0
       };
     case ConnectActions.CONNECT_ATTEMPT:
-      return {...state, retryCount: state.retryCount + 1};
+      return {...state, retryCount: state.retryCount + 1, serverURL: payload.serverURL};
     case ConnectActions.CONNECT_FAIL:
       return {...state, connected: false};
     case ConnectActions.CONNECT_SET_SERVER:
