@@ -5,13 +5,16 @@ import {
   StyleSheet,
   Image,
   Text,
-  TouchableOpacity}
-from 'react-native';
+  TouchableOpacity
+} from 'react-native';
+import styles from './styles'
 
-
-interface Props { }
+interface Props {
+  navigation: any
+}
 interface State {
-
+  id: string,
+  password: string
 }
 
 const personIcon = require("../../../src/features/start/login1_person.png");
@@ -40,9 +43,8 @@ export default class Register extends Component<Props, State> {
                 <Image source={personIcon} style={styles.icon} resizeMode="contain" />
               </View>
               <TextInput
-                name='id'
                 placeholder='Username'
-                placeholderTextColor="#FFF"
+                placeholderTextColor="black"
                 style={styles.input}
                 value={this.state.id}
                 onChangeText={text => this.idChange(text)}
@@ -54,7 +56,7 @@ export default class Register extends Component<Props, State> {
               </View>
               <TextInput
                 placeholder='Password'
-                placeholderTextColor="#FFF"
+                placeholderTextColor="black"
                 style={styles.input}
                 value={this.state.password}
                 onChangeText={text => this.passwordChange(text)}
@@ -62,12 +64,12 @@ export default class Register extends Component<Props, State> {
               />
             </View>
             <TouchableOpacity activeOpacity={.5}>
-              <View style={styles.button}>
+              <View>
                 <Text onPress={() => navigate('Login')} style={styles.buttonText}>Sign In</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={.5}>
-              <View style={styles.button}>
+              <View>
                 <Text onPress={() => navigate('Home')} style={styles.buttonText}>Home</Text>
               </View>
             </TouchableOpacity>
@@ -76,40 +78,3 @@ export default class Register extends Component<Props, State> {
     )
   }
 }
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  wrapper: {
-    paddingVertical: 30,
-  },
-  iconWrap: {
-    paddingHorizontal: 7,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  icon: {
-    height: 20,
-    width: 20,
-  },
-  inputWrap: {
-    flexDirection: "row",
-    marginVertical: 5,
-    height: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: "#CCC"
-  },
-  input: {
-    flex: 1,
-    paddingBottom: 20,
-    marginTop: 15,
-    height: 40,
-  },
-  buttonText: {
-    color: "#FFF",
-    fontSize: 18,
-  },
-})

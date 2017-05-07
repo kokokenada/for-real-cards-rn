@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Animated, Button,
   Text,
@@ -7,6 +7,9 @@ import {
 import { StackNavigator } from 'react-navigation';
 import Login from './features/start/login';
 import Register from './features/start/register';
+import JoinGame from './features/start/joinGame'
+import StartGame from './features/start/startGame'
+import StartOrJoinGame from './features/start/startOrJoinGame'
 import View = Animated.View;
 import {ReduxPackages} from './redux-packages';
 
@@ -15,7 +18,7 @@ export interface Props {
 }
 export interface State { }
 
-class HomeScreen extends React.Component<Props, State> {
+class HomeScreen extends Component<Props, State> {
 
   static navigationOptions = {
     title: 'Welcome',
@@ -24,18 +27,29 @@ class HomeScreen extends React.Component<Props, State> {
     const { navigate } = this.props.navigation;
 
     return (
-<View>
-  <Text>Hello, Navigation!</Text>
-  <Button
-    onPress={() => navigate('Login')}
-    title="Login"
-  />
-  <Button
-    onPress={() => navigate('Register')}
-    title='Register'
-  />
-</View>
-
+      <View>
+        <Text>Hello, Navigation!</Text>
+        <Button
+          onPress={() => navigate('Login')}
+          title="Login"
+        />
+        <Button
+          onPress={() => navigate('Register')}
+          title='Register'
+        />
+        <Button
+          onPress={() => navigate('StartGame')}
+          title='Start a game'
+        />
+        <Button
+          onPress={() => navigate('JoinGame')}
+          title='Join a game'
+        />
+        <Button
+          onPress={() => navigate('StartOrJoinGame')}
+          title='Start or join a game'
+        />
+      </View>
     );
   }
 }
@@ -43,7 +57,10 @@ class HomeScreen extends React.Component<Props, State> {
 export const App = StackNavigator({
   Home: { screen: HomeScreen },
   Login: { screen: Login },
-  Register: {screen: Register }
+  Register: { screen: Register },
+  StartGame: { screen: StartGame },
+  JoinGame: { screen: JoinGame },
+  StartOrJoinGame: { screen: StartOrJoinGame },
 });
 
 export let reduxPackages = new ReduxPackages();
