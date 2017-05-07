@@ -41,11 +41,13 @@ export class ReduxPackageCombiner {
    * Logs all actions and states after they are dispatched.
    */
   private static logger = store => next => action => {
-    console.group(action.type);
+    if (typeof console.group === 'function')
+      console.group(action.type);
     console.info('Logger: dispatching:', action);
     let result = next(action);
     console.log('Logger: next state', store.getState());
-    console.groupEnd();
+    if (typeof console.groupEnd === 'function')
+      console.groupEnd();
     return result;
   };
 
