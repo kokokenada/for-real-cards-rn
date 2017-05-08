@@ -4,12 +4,12 @@ import {
   Text,
 } from 'react-native';
 
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import Login from './features/start/login';
 import Register from './features/start/register';
 import JoinGame from './features/start/joinGame'
 import StartGame from './features/start/startGame'
-import StartOrJoinGame from './features/start/startOrJoinGame'
+import { StartOrJoinGameTabs } from './features/start/router'
 import View = Animated.View;
 import {ReduxPackages} from './redux-packages';
 
@@ -21,7 +21,7 @@ export interface State { }
 class HomeScreen extends Component<Props, State> {
 
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Home',
   };
   render() {
     const { navigate } = this.props.navigation;
@@ -60,7 +60,8 @@ export const App = StackNavigator({
   Register: { screen: Register },
   StartGame: { screen: StartGame },
   JoinGame: { screen: JoinGame },
-  StartOrJoinGame: { screen: StartOrJoinGame },
+  StartOrJoinGame: { screen: StartOrJoinGameTabs },
 });
+
 
 export let reduxPackages = new ReduxPackages();

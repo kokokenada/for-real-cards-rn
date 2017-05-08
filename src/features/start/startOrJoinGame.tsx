@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'react-native';
 import styles from './styles'
 
@@ -14,7 +14,7 @@ export default class StartOrJoinGame extends Component<Props, State> {
   render() {
     const { navigate } = this.props.navigation
     return (
-      <View style={styles.container}>
+     <View style={styles.container}>
 
         <TouchableOpacity activeOpacity={.5}>
           <View>
