@@ -4,11 +4,16 @@ import { TabNavigator } from 'react-navigation'
 import StartGame from './startGame'
 import JoinGame from './joinGame'
 
-export const StartOrJoinGameTabs = TabNavigator({
-  StartGame: {
-    screen: StartGame
-  },
-  JoinGame: {
-    screen: JoinGame
-  },
-})
+const StartOrJoinGameTabsRouter = {
+  StartGame: { screen: StartGame },
+  JoinGame: { screen: JoinGame },
+}
+
+const StartOrJoinGameTabsConfig = {
+  tabBarPosition: 'top'
+}
+
+export const StartOrJoinGameTabs = TabNavigator(
+  StartOrJoinGameTabsRouter,
+  StartOrJoinGameTabsConfig
+)

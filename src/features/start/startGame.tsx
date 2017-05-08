@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, Animated, TextInput, TouchableOpacity, Modal, Button } from 'react-native';
 import styles from './styles'
+import NotImplementedModal from './notImplementedModal'
 
 interface Props {
   navigation: any,
@@ -11,13 +12,25 @@ interface State {
 }
 
 export default class StartGame extends Component<Props, State> {
+  state = {
+    visible: false
+  }
+
+  showModal() {
+    console.log('pressed')
+  }
+
+  setModalVisible(visible) {
+    this.setState({ visible })
+  }
+
   render() {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={.5}>
           <View>
-            <Text style={styles.buttonText}>Crazy Eights</Text>
+            <Text style={styles.buttonText} onPress={this.showModal}>Crazy Eights</Text>
           </View>
         </TouchableOpacity>
 

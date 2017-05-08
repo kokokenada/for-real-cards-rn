@@ -1,5 +1,12 @@
-import React, {Component} from 'react';
-import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Animated,
+  TextInput,
+  TouchableOpacity
+} from 'react-native';
 
 interface Props {
 
