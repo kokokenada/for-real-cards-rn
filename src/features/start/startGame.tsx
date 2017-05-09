@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Text, View, TouchableOpacity, Image, TouchableHighlight } from 'react-native';
-import styles from './styles'
+import styles from './config/styles'
 import NotImplementedModal from './notImplementedModal'
 
 interface Props {
@@ -11,11 +11,11 @@ interface State {
 
 }
 
-const crazyEightsIcon = require('../../../src/features/start/crazy_eights.png')
-const euchureIcon = require('../../../src/features/start/euchure.png')
-const ginIcon = require('../../../src/features/start/gin.png')
-const texasHoldemIcon = require('../../../src/features/start/texas-holdem.jpg')
-const wizardIcon = require('../../../src/features/start/wizard.png')
+const crazyEightsIcon = require('../../../src/features/start/images/crazy_eights.png')
+const euchureIcon = require('../../../src/features/start/images/euchure.png')
+const ginIcon = require('../../../src/features/start/images/gin.png')
+const texasHoldemIcon = require('../../../src/features/start/images/texas-holdem.jpg')
+const wizardIcon = require('../../../src/features/start/images/wizard.png')
 
 export default class StartGame extends Component<Props, State> {
   static navigationOptions = {

@@ -9,7 +9,7 @@ import Login from './features/start/login';
 import Register from './features/start/register';
 import JoinGame from './features/start/joinGame'
 import StartGame from './features/start/startGame'
-import { StartOrJoinGameTabs } from './features/start/router'
+import { StartOrJoinGameTabs } from './features/start/config/router'
 import View = Animated.View;
 import {ReduxPackages} from './redux-packages';
 

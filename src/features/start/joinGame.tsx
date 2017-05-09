@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import styles from './styles'
+import styles from './config/styles'
 
 interface Props {
 
@@ -18,8 +18,8 @@ interface State {
 
 }
 
-const personIcon = require('../../../src/features/start/login1_person.png')
-const lockIcon = require('../../../src/features/start/login1_lock.png')
+const personIcon = require('../../../src/features/start/images/login1_person.png')
+const lockIcon = require('../../../src/features/start/images/login1_lock.png')
 
 export default class JoinGame extends Component<Props, State> {
   static navigationOptions = {

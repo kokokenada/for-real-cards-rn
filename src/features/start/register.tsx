@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
-import styles from './styles'
+import styles from './config/styles'
 
 interface Props {
   navigation: any
@@ -17,7 +17,7 @@ interface State {
   password: string
 }
 
-const personIcon = require("../../../src/features/start/login1_person.png");
+const personIcon = require("../../../src/features/start/images/login1_person.png");
 
 export default class Register extends Component<Props, State> {
   state = {

@@ -3,7 +3,7 @@ import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'rea
 import Image = Animated.Image;
 import {LoginActions} from '../../common-app/redux-packages/login/login-actions.class';
 import {Credentials} from '../../common-app/api/services/credentials';
-import styles from './styles'
+import styles from './config/styles'
 
 interface Props {
 }
@@ -13,9 +13,9 @@ interface State {
   password: string
 }
 
-const background = require('../../../src/features/start/background.jpg');
-const personIcon = require('../../../src/features/start/login1_person.png');
-const lockIcon = require('../../../src/features/start/login1_lock.png');
+const background = require('../../../src/features/start/images/background.jpg');
+const personIcon = require('../../../src/features/start/images/login1_person.png');
+const lockIcon = require('../../../src/features/start/images/login1_lock.png');
 
 export default class Login extends Component<Props, State> {
 
