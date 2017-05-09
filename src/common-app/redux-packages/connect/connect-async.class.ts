@@ -5,43 +5,46 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 
-import { ConnectService } from "./connect-service";
 import { ConnectActions } from "./connect-actions.class";
+import { IConnectService } from './connect-service-interface';
 
 
 export class ConnectAsync {
 
-  static connect = (action$: Observable<IPayloadAction>) => {
+  constructor(private connectService:IConnectService) {
+  }
+
+  connect = (action$: Observable<IPayloadAction>) => {
     return action$.filter(({ type }) => type === ConnectActions.CONNECT_START)
       .flatMap(({ payload }) => {
-        if (ConnectService.isConnected()) {
+        if (this.connectService.isConnected()) {
           // We're already connected, so dispatch a success reponse
-          return Observable.from([ConnectActions.successFactory(ConnectService.getServerURL())]);
+          return Observable.from([ConnectActions.successFactory(this.connectService.getServerURL())]);
         } else {
           // Not connected,
-          return Observable.from([ConnectActions.attemptFactory(ConnectService.getServerURL())]);
+          return Observable.from([ConnectActions.attemptFactory(this.connectService.getServerURL())]);
         }
       });
   };
 
-  static attempt= (action$: Observable<IPayloadAction>) => {
+  attempt= (action$: Observable<IPayloadAction>) => {
     return action$.filter(({ type }) => type === ConnectActions.CONNECT_ATTEMPT)
       .flatMap(({ payload }) => {
-        if (ConnectService.isConnected()) {
-          return Observable.from([ConnectActions.successFactory(ConnectService.getServerURL())]);
+        if (this.connectService.isConnected()) {
+          return Observable.from([ConnectActions.successFactory(this.connectService.getServerURL())]);
         } else {
-          ConnectService.reconnect();
-          return Observable.from([ConnectActions.attemptFactory(ConnectService.getServerURL())]).delay(5000);
+          this.connectService.reconnect();
+          return Observable.from([ConnectActions.attemptFactory(this.connectService.getServerURL())]).delay(5000);
         }
       });
   };
 
-  static setNewServer= (action$: Observable<IPayloadAction>) => {
+  setNewServer= (action$: Observable<IPayloadAction>) => {
     return action$.filter(({ type }) => type === ConnectActions.CONNECT_SET_SERVER)
       .flatMap(({ payload }) => {
-        ConnectService.disconnect();
-        ConnectService.setServerTo(payload.serverURL);
-        return Observable.from([ConnectActions.attemptFactory(ConnectService.getServerURL())]);
+        this.connectService.disconnect();
+        this.connectService.setServerTo(payload.serverURL);
+        return Observable.from([ConnectActions.attemptFactory(this.connectService.getServerURL())]);
       }
     );
   };

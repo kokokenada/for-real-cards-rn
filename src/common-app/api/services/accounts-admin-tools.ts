@@ -2,14 +2,20 @@
  * Created by kenono on 2016-05-01.
  */
 import 'meteor-client';
-import { User} from '../../api';
 import { _ } from 'underscore';
 
 declare let Roles;
 
 import { PagingTools, FilterDefinition} from "./page-tools"
+import {IUser} from '../../redux-packages/login/login-types';
 
 const SUBSCRIPTION_NAME = 'common-AccountsAdminTools';
+
+
+
+
+// TO DO: Rip out Meteor specifics
+
 
 export interface AccountsAdminToolsConfig {
   maxUsersPerPage: number;
@@ -34,13 +40,13 @@ export class Field implements FieldInterface {
   key:string;
   label:string;
 
-  fn(user:User):string {
+  fn(user:IUser):string {
     if (!user)
       return "";
     return user[this.key]
   }
 
-  displayText(user:User):string {
+  displayText(user:IUser):string {
     return this.fn(user);
   }
 }
@@ -54,7 +60,7 @@ export class AccountsAdminTools {
     allowImpersonation: false
   };
 
-  private static users:User[] = [];
+  private static users:IUser[] = [];
   protected static fields:Field[] = [
     new Field({
       key: 'username',

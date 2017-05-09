@@ -3,12 +3,13 @@ declare let Package:any; declare let Accounts:any; // Couldn't find typings
 declare let __meteor_runtime_config__;
 
 import { _ } from 'underscore';
+import {IConnectService} from '../common-app/redux-packages/connect/connect-service-interface';
 
 // Make an abstract parent and children that implement specific backend
 // For now, this is Meteor specific
-export class ConnectService {
+export class ConnectServiceMeteor implements IConnectService {
 
-  static isConnected():boolean {
+  isConnected():boolean {
     return Meteor.status().connected;
   }
 
@@ -31,11 +32,11 @@ export class ConnectService {
     return {result, fromMeteor};
   }
 
-  static getServerURL():string {
-    return ConnectService._getServerURL().result;
+  getServerURL():string {
+    return ConnectServiceMeteor._getServerURL().result;
   }
 
-  static setServerTo(app_url) {
+  setServerTo(app_url) {
     console.log('setting url' + app_url)
     Meteor.connection = Meteor.connect(app_url);
     _.each(['subscribe', 'methods', 'call', 'apply', 'status','reconnect','disconnect'], function (name) {
@@ -45,8 +46,8 @@ export class ConnectService {
     Accounts.connection = Meteor.connection;
   }
 
-  static reconnect() {
-    let server = ConnectService._getServerURL();
+  reconnect() {
+    let server = ConnectServiceMeteor._getServerURL();
     let display = server.result + (server.fromMeteor ? ' (url calculated by meteor)' : ' (url from config)');
     console.info('Reconnecting: ' + display + ' Meteor.status(): ' + JSON.stringify(Meteor.status()));
     Meteor.connect(server.result);
@@ -61,7 +62,7 @@ export class ConnectService {
       })
   }
 
-  static disconnect() {
+  disconnect() {
     Meteor.disconnect();
   }
 

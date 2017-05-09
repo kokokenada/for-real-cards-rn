@@ -1,11 +1,10 @@
 //export * from './login.types';
+import {IUser} from './login-types';
 export * from './login-package';
-export * from './login-service';
 export * from './login-async.class';
 export * from './login-actions.class';
 export * from './login-reducer';
 
-import { User } from '../../api';
 import { Credentials } from "../../api/services/credentials";
 import { IDocumentChange } from "../../api";
 
@@ -16,15 +15,15 @@ export interface ILoginState {
   loggingIn:boolean;
   userId:string;
   displayName: string;
-  user:User;
+  user:IUser;
   errorMessage:string;
 }
 
 export interface ILoginActionPayload {
   credentials?: Credentials,
-  user?: User,
+  user?: IUser,
   userId?: string,
-  documentChange?:IDocumentChange<User>,
+  documentChange?:IDocumentChange<IUser>,
   autoLogin?: boolean
   error?: any
 }

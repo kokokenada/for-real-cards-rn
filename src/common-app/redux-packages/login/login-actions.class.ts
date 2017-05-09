@@ -1,7 +1,7 @@
-import { User } from '../../api';
 import { IDocumentChange } from '../../api';
 import { IPayloadAction, ReduxPackageCombiner } from "../../redux-package";
 import { Credentials } from "../../api/services/credentials";
+import {IUser} from './login-types';
 
 export class LoginActions {
   private static prefix = 'CA_LOGIN_';
@@ -37,7 +37,7 @@ export class LoginActions {
     ReduxPackageCombiner.dispatch({ type: LoginActions.TEMP_USER_REQUEST});
   }
 
-  static saveUser(user:User): void {
+  static saveUser(user:IUser): void {
     ReduxPackageCombiner.dispatch({type: LoginActions.SAVE_USER_REQUEST, payload: {user: user}});
   }
 
@@ -45,15 +45,15 @@ export class LoginActions {
     ReduxPackageCombiner.dispatch({type: LoginActions.WATCH_USER});
   }
 
-  static watchedUserFirstReadFactory(user:User):IPayloadAction {
+  static watchedUserFirstReadFactory(user:IUser):IPayloadAction {
     return {type: LoginActions.WATCH_USER_FIRST_READ, payload: {user: user}};
   }
 
-  static saveUserResponseFactory(user:User):IPayloadAction {
+  static saveUserResponseFactory(user:IUser):IPayloadAction {
     return {type: LoginActions.SAVE_USER_RESPONSE, payload: {user: user}};
   }
 
-  static loginSuccessFactory(user:User, userId:string, autoLogin:boolean=false):IPayloadAction {
+  static loginSuccessFactory(user:IUser, userId:string, autoLogin:boolean=false):IPayloadAction {
     return {type: LoginActions.LOGGED_IN, payload: {user: user, userId:userId, autoLogin:autoLogin}};
   }
 
@@ -61,7 +61,7 @@ export class LoginActions {
     return {type: LoginActions.LOGGED_OUT};
   }
 
-  static changeFactory(documentChange:IDocumentChange<User>):IPayloadAction {
+  static changeFactory(documentChange:IDocumentChange<IUser>):IPayloadAction {
     return {type: LoginActions.WATCHED_USER_CHANGED, payload: {documentChange:documentChange}};
   }
 }

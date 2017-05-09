@@ -1,6 +1,6 @@
 
-import { User } from '../../api';
 import { _ } from 'underscore';
+import {IUser} from '../../redux-packages/login/login-types';
 
 export interface MenuItemDefintion {
   id:string;
@@ -40,7 +40,7 @@ export class MenuItem implements MenuItemDefintion {
     //this.menu=options;
   }
 
-  shouldRender (user:User) {
+  shouldRender (user:IUser) {
 //     console.log('should render')
 //     console.log(user)
 //    console.log(this)
