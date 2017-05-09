@@ -10,7 +10,8 @@ const StartOrJoinGameTabsRouter = {
 }
 
 const StartOrJoinGameTabsConfig = {
-  tabBarPosition: 'top'
+  tabBarPosition: 'top',
+  backBehavior: 'none',
 }
 
 export const StartOrJoinGameTabs = TabNavigator(

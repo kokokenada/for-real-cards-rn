@@ -18,6 +18,10 @@ const texasHoldemIcon = require('../../../src/features/start/texas-holdem.jpg')
 const wizardIcon = require('../../../src/features/start/wizard.png')
 
 export default class StartGame extends Component<Props, State> {
+  static navigationOptions = {
+    tabBarLabel: 'Start game',
+  }
+
   buttonPress(game) {
     console.log(`pressed ${game}`)
   }
