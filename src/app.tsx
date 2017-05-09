@@ -18,6 +18,7 @@ export default class HomeScreen extends Component<Props, State> {
   static navigationOptions = {
     title: 'Home',
   };
+
   render() {
     const { navigate } = this.props.navigation;
 
@@ -31,14 +32,6 @@ export default class HomeScreen extends Component<Props, State> {
         <Button
           onPress={() => navigate('Register')}
           title='Register'
-        />
-        <Button
-          onPress={() => navigate('StartGame')}
-          title='Start a game'
-        />
-        <Button
-          onPress={() => navigate('JoinGame')}
-          title='Join a game'
         />
         <Button
           onPress={() => navigate('StartOrJoinGame')}

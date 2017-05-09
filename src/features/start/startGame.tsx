@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, TouchableHighlight } from 'react-native';
 import styles from './config/styles'
 import NotImplementedModal from './notImplementedModal'
@@ -18,6 +18,7 @@ const texasHoldemIcon = require('../../../src/features/start/images/texas-holdem
 const wizardIcon = require('../../../src/features/start/images/wizard.png')
 
 export default class StartGame extends Component<Props, State> {
+
   static navigationOptions = {
     tabBarLabel: 'Start game',
   }

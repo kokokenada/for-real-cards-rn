@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'react-native';
 import Image = Animated.Image;
 import {LoginActions} from '../../common-app/redux-packages/login/login-actions.class';
