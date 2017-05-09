@@ -66,8 +66,24 @@ export default StyleSheet.create({
   accountText: {
     color: "#D8D8D8"
   },
+  startGamesIcon: {
+    height: 50,
+    width: 50,
+  },
+  startIconWrap: {
+    paddingHorizontal: 7,
+    marginTop: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FF3366",
+  },
+  startButtonText: {
+    color: "#FFF",
+    fontSize: 18,
+    justifyContent: "center",
+  },
   signupLinkText: {
     color: "powderblue",
     marginLeft: 5,
-  }
+  },
 });
