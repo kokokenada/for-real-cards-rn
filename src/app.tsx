@@ -9,7 +9,7 @@ import Login from './features/start/login';
 import Register from './features/start/register';
 import JoinGame from './features/start/joinGame'
 import StartGame from './features/start/startGame'
-import { StartOrJoinGameTabs } from './features/start/config/router'
+// import { StartOrJoinGameTabs } from './features/start/config/router'
 import View = Animated.View;
 import {ReduxPackages} from './redux-packages';
 
@@ -18,7 +18,7 @@ export interface Props {
 }
 export interface State { }
 
-class HomeScreen extends Component<Props, State> {
+export default class HomeScreen extends Component<Props, State> {
 
   static navigationOptions = {
     title: 'Home',
@@ -54,14 +54,14 @@ class HomeScreen extends Component<Props, State> {
   }
 }
 
-export const App = StackNavigator({
-  Home: { screen: HomeScreen },
-  Login: { screen: Login },
-  Register: { screen: Register },
-  StartGame: { screen: StartGame },
-  JoinGame: { screen: JoinGame },
-  StartOrJoinGame: { screen: StartOrJoinGameTabs },
-});
+// export const App = StackNavigator({
+//   Home: { screen: HomeScreen },
+//   Login: { screen: Login },
+//   Register: { screen: Register },
+//   StartGame: { screen: StartGame },
+//   JoinGame: { screen: JoinGame },
+//   StartOrJoinGame: { screen: StartOrJoinGameTabs },
+// });
 
 
 export let reduxPackages = new ReduxPackages();

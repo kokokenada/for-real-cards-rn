@@ -1,5 +1,5 @@
 import 'react-native'
-import { App } from './app'
+import { App } from './features/start/config/router';
 import React from 'react'
 import renderer from 'react-test-renderer'
 it('renders correctly', () => {
