@@ -21,16 +21,16 @@ export default StyleSheet.create({
     paddingVertical: 30,
   },
   inputWrap: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginVertical: 10,
     height: 40,
     borderBottomWidth: 1,
-    borderBottomColor: "#CCC"
+    borderBottomColor: '#CCC'
   },
   iconWrap: {
     paddingHorizontal: 7,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
     height: 20,
@@ -41,30 +41,30 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: "#FF3366",
+    backgroundColor: '#FF3366',
     paddingVertical: 20,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 30,
   },
   buttonText: {
-    color: "#FFF",
+    color: '#FFF',
     fontSize: 18,
   },
   forgotPasswordText: {
-    color: "powderblue",
-    backgroundColor: "transparent",
-    textAlign: "right",
+    color: 'powderblue',
+    backgroundColor: 'transparent',
+    textAlign: 'right',
     paddingRight: 15,
   },
   signupWrap: {
-    backgroundColor: "transparent",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   accountText: {
-    color: "#D8D8D8"
+    color: '#D8D8D8'
   },
   startGamesIcon: {
     height: 50,
@@ -73,17 +73,23 @@ export default StyleSheet.create({
   startIconWrap: {
     paddingHorizontal: 7,
     marginTop: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FF3366",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FF3366',
   },
   startButtonText: {
-    color: "#FFF",
+    color: '#FFF',
     fontSize: 18,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   signupLinkText: {
-    color: "powderblue",
+    color: 'powderblue',
     marginLeft: 5,
+  },
+  welcomeTitle: {
+    textAlign: 'center',
+    marginBottom: 20,
+    fontSize: 20,
+    color: 'red'
   },
 });

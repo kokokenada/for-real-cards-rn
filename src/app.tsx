@@ -4,13 +4,8 @@ import {
   Text,
 } from 'react-native';
 
-import { StackNavigator, TabNavigator } from 'react-navigation';
-import Login from './features/start/login';
-import Register from './features/start/register';
-import JoinGame from './features/start/joinGame'
-import StartGame from './features/start/startGame'
-// import { StartOrJoinGameTabs } from './features/start/config/router'
 import View = Animated.View;
+import styles from './features/start/config/styles'
 import {ReduxPackages} from './redux-packages';
 
 export interface Props {
@@ -27,8 +22,8 @@ export default class HomeScreen extends Component<Props, State> {
     const { navigate } = this.props.navigation;
 
     return (
-      <View>
-        <Text>Hello, Navigation!</Text>
+      <View style={styles.container}>
+        <Text style={styles.welcomeTitle}>Welcome to ForRealCards</Text>
         <Button
           onPress={() => navigate('Login')}
           title="Login"
@@ -53,15 +48,5 @@ export default class HomeScreen extends Component<Props, State> {
     );
   }
 }
-
-// export const App = StackNavigator({
-//   Home: { screen: HomeScreen },
-//   Login: { screen: Login },
-//   Register: { screen: Register },
-//   StartGame: { screen: StartGame },
-//   JoinGame: { screen: JoinGame },
-//   StartOrJoinGame: { screen: StartOrJoinGameTabs },
-// });
-
 
 export let reduxPackages = new ReduxPackages();
