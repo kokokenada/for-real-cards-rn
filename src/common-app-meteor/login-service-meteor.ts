@@ -5,9 +5,10 @@ import {Credentials} from "../common-app/api/services/credentials";
 import {LoginActions} from "../common-app/redux-packages/login/login-actions.class";
 import {IPayloadAction} from '../common-app/redux-package';
 import {ReduxModuleUtil} from "../common-app/redux-packages/redux-module-util";
-import {IDocumentChange, MeteorCursorObservers} from '../common-app/api';
+import {IDocumentChange } from '../common-app/api';
 import {ILoginService} from '../common-app/redux-packages/login/login-service-interface';
 import {IUser} from '../common-app/redux-packages/login/login-types';
+import { MeteorCursorObservers } from '../common-app-meteor';
 
 export class LoginServiceMeteor implements ILoginService {
 

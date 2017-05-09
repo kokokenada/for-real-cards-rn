@@ -4,6 +4,7 @@ export * from './login-package';
 export * from './login-async.class';
 export * from './login-actions.class';
 export * from './login-reducer';
+export * from './login-types';
 
 import { Credentials } from "../../api/services/credentials";
 import { IDocumentChange } from "../../api";

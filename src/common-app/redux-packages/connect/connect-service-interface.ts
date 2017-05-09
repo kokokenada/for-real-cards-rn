@@ -1,6 +1,6 @@
 
 export  interface IConnectService {
-  isConnected():boolean;
+  isConnected():Promise<boolean>;
   getServerURL():string;
   setServerTo(app_url): void;
   reconnect(): void;

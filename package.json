@@ -17,6 +17,8 @@
     "start:android": "npm run build && concurrently -r 'npm run watch' 'react-native run-android'"
   },
   "dependencies": {
+    "babel-plugin-transform-regenerator": "^6.24.1",
+    "firebase": "^3.9.0",
     "immutable": "3.8.1",
     "meteor-node-stubs": "0.2.6",
     "react": "16.0.0-alpha.6",

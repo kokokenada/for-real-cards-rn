@@ -11,6 +11,11 @@ import View = Animated.View;
 import {ReduxPackages} from './redux-packages';
 import {ReduxPackageCombiner} from './common-app';
 import 'meteor-client';
+import * as firebase from 'firebase';
+
+// Initialize Firebase
+import { firebaseConfig } from './env';
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 export interface Props {
   navigation:any;

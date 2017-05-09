@@ -9,8 +9,8 @@ import {IConnectService} from '../common-app/redux-packages/connect/connect-serv
 // For now, this is Meteor specific
 export class ConnectServiceMeteor implements IConnectService {
 
-  isConnected():boolean {
-    return Meteor.status().connected;
+  async isConnected():Promise<boolean> {
+    return await Meteor.status().connected;
   }
 
   private static _getServerURL():{result: string, fromMeteor: boolean} {

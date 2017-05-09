@@ -1,7 +1,7 @@
 import { Observable, Subscriber } from 'rxjs';
 import 'meteor-client';
 
-import {EDocumentChangeType, IDocumentChange} from './document-change.interface';
+import {EDocumentChangeType, IDocumentChange} from '../common-app/api/reactive-data/document-change.interface';
 
 export interface BatchAndWatch<T> {
   batchObservable: Observable<T[]>;

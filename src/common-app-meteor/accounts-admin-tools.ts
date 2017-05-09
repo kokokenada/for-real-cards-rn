@@ -7,7 +7,7 @@ import { _ } from 'underscore';
 declare let Roles;
 
 import { PagingTools, FilterDefinition} from "./page-tools"
-import {IUser} from '../../redux-packages/login/login-types';
+import {IUser} from '../common-app';
 
 const SUBSCRIPTION_NAME = 'common-AccountsAdminTools';
 
