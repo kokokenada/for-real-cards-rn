@@ -1,20 +1,21 @@
 import 'meteor-client';
 import { Observable } from 'rxjs';
 
-import {Credentials} from "../../api/services/credentials";
-import { User } from '../../api';
-import {LoginActions} from "./login-actions.class";
-import {IPayloadAction} from '../../redux-package';
-import {ReduxModuleUtil} from "../redux-module-util";
-import {IDocumentChange, MeteorCursorObservers} from '../../api';
+import {Credentials} from "../common-app/api/services/credentials";
+import {LoginActions} from "../common-app/redux-packages/login/login-actions.class";
+import {IPayloadAction} from '../common-app/redux-package';
+import {ReduxModuleUtil} from "../common-app/redux-packages/redux-module-util";
+import {IDocumentChange } from '../common-app/api';
+import {ILoginService} from '../common-app/redux-packages/login/login-service-interface';
+import {IUser} from '../common-app/redux-packages/login/login-types';
+import { MeteorCursorObservers } from '../common-app-meteor';
 
-// Later, we can make an abstract parent and children that implement specific backend
-// For now, this is Meteor specific
-export class LoginService {
+export class LoginServiceMeteor implements ILoginService {
 
-  static login(credentials:Credentials):Promise<IPayloadAction> {
+  login(credentials:Credentials):Promise<IPayloadAction> {
     return new Promise((resolve, reject)=>{
       credentials.saveCredentials();
+      console.log(Meteor);
       Meteor.loginWithPassword(
         credentials.email ? credentials.email : credentials.username, credentials.password,
         (error)=> {
@@ -25,7 +26,7 @@ export class LoginService {
             console.info('Login successful.');
             resolve(
               LoginActions.loginSuccessFactory(
-                LoginService.userFromMeteorUser(Meteor.user()), Meteor.userId()
+                this.userFromMeteorUser(Meteor.user()), Meteor.userId()
               )
             );
           }
@@ -34,7 +35,11 @@ export class LoginService {
     })
   }
 
-  static register(credentials:Credentials):Promise<IPayloadAction> {
+  static defaultAvatarUrl() { // Move this
+    return Meteor.absoluteUrl('default-avatar.png');
+  };
+
+  register(credentials:Credentials):Promise<IPayloadAction> {
     return new Promise((resolve, reject)=>{
       console.debug("Creating user:" + credentials.username + ", " + credentials.email);
       credentials.saveCredentials();
@@ -52,14 +57,14 @@ export class LoginService {
         } else {
           console.info("Register successful.")
           resolve(LoginActions.loginSuccessFactory(
-            LoginService.userFromMeteorUser(Meteor.user()), Meteor.userId()
+            this.userFromMeteorUser(Meteor.user()), Meteor.userId()
           ));
         }
       })
     });
   };
 
-  static createTempUser():Promise<IPayloadAction> {
+  createTempUser():Promise<IPayloadAction> {
     return new Promise((resolve, reject)=>{
       Meteor.call('CommonGetNextSequence', 'temp_user', (error, result)=> {
         if (error) {
@@ -71,7 +76,7 @@ export class LoginService {
             "",
             Math.random().toString()
           );
-          LoginService.register(credentials).then(
+          this.register(credentials).then(
             (action) => {
               console.info("Registering tmp user successful.")
               resolve(action);
@@ -84,7 +89,7 @@ export class LoginService {
     });
   }
 
-  static saveUser(edittedUserObject:User):Promise<IPayloadAction> {
+  saveUser(edittedUserObject:IUser):Promise<IPayloadAction> {
     return new Promise( (resolve, reject)=> {
       console.log("in saveUser execution")
       Meteor.call('commonAppUpdateUser',
@@ -107,7 +112,7 @@ export class LoginService {
     });
   }
 
-  static logOut():Promise<IPayloadAction> {
+  logOut():Promise<IPayloadAction> {
     return new Promise((resolve, reject)=> {
       Meteor.logout((error)=> {
         if (error) {
@@ -121,14 +126,14 @@ export class LoginService {
     })
   };
 
-  static watchCurrentUser():Promise<IPayloadAction> {
+  watchCurrentUser():Promise<IPayloadAction> {
     return new Promise((resolve, reject)=>{
 
       console.log(Meteor);
 
       Meteor.subscribe('user-edit', {reactive: true}, {
         onReady: ()=> {
-          resolve(LoginActions.watchedUserFirstReadFactory(LoginService.user())); // Copy Current User
+          resolve(LoginActions.watchedUserFirstReadFactory(this.user())); // Copy Current User
         },
         onStop: (error)=> {
           if (error) {
@@ -140,17 +145,17 @@ export class LoginService {
     });
   }
 
-  static createUserObserver(userId:string):Observable<IDocumentChange<User>>
+  createUserObserver(userId:string):Observable<IDocumentChange<IUser>>
   {
     let users = Meteor.users;
     let cursor = users.find({_id: userId});
     console.log(cursor);
-    return MeteorCursorObservers.fromMeteorCursor<User>(cursor);
+    return MeteorCursorObservers.fromMeteorCursor<IUser>(cursor);
   }
 
-  private static _user(userId:string = undefined) {
+  _user(userId:string = undefined) {
     if (!userId) {
-      userId = LoginService.userId();
+      userId = this.userId();
       if (!userId) {
         return null;
       }
@@ -162,60 +167,30 @@ export class LoginService {
     return user;
   }
 
-  static getDisplayName(param:string):string;
-  static getDisplayName(param:User):string;
-  static getDisplayName(param:any):string {
-    let user:any;
-    if (param === undefined || typeof param === 'string') {
-      user = LoginService._user(param);
-    } else if (typeof param === 'object') {
-      user = param;
-    }
-    return LoginService.getDisplayNameNoLookup(user);
-  }
-  static getDisplayNameNoLookup(user:User) {
-    if (!user) {
-      return 'Not Logged In';
-    }
-    if (user.username)
-      return user.username;
-    if (user.emails && user.emails.length>0)
-      return user.emails[0].address;
-    return user._id;
+
+  isLoggedIn():boolean {
+    return this.userId()===null ? false : true;
   }
 
-  static isLoggedIn():boolean {
-    return LoginService.userId()===null ? false : true;
-  }
-
-  static userId():string {
+  userId():string {
     return Meteor.userId();
   }
 
-  static currentUserEmail():string {
-    let user = LoginService._user();
-    if (user) {
-      if (user.emails && user.emails.length>0) {
-        return user.emails[0].address;
-      }
-    }
-    return '';
-  }
-
-  static userFromMeteorUser(userMeteor:Meteor.User):User {
+  private userFromMeteorUser(userMeteor:Meteor.User):IUser {
     if (!userMeteor)
       return null;
-    let user:User = new User();
-    user._id = LoginService.userId();
-    user.emails = userMeteor.emails;
-    user.profile = userMeteor.profile;
-    user.services = userMeteor.services;
-    user.username = userMeteor.username;
-    user.roles = userMeteor.roles;
+    let user:IUser = {
+      _id: this.userId(),
+      emails: userMeteor.emails,
+      profile: userMeteor.profile,
+      services: userMeteor.services,
+      username: userMeteor.username,
+      roles: userMeteor.roles,
+    }
     return user;
   }
 
-  static user():User {
-    return LoginService.userFromMeteorUser(LoginService._user());
+  user():IUser {
+    return this.userFromMeteorUser(this._user());
   }
 }

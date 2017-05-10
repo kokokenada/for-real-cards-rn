@@ -29,7 +29,7 @@ export const StartOrJoinGameTabs = TabNavigator(
   StartOrJoinGameTabsConfig
 )
 
-export const App = StackNavigator({
+export const Navigator = StackNavigator({
   Home: { screen: HomeScreen },
   Login: { screen: Login },
   Register: { screen: Register },

@@ -1,23 +1,39 @@
-import React, { Component } from 'react';
-import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'react-native';
-import Image = Animated.Image;
-import {LoginActions} from '../../common-app/redux-packages/login/login-actions.class';
-import {Credentials} from '../../common-app/api/services/credentials';
+
 import styles from './config/styles'
 
+import React, {Component} from 'react';
+import { Provider } from 'react-redux';
+import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import { connect } from 'react-redux';
+import {
+  Credentials,
+  IConnectState,
+  LoginActions
+} from '../../common-app';
+import ConnectionStatus from './connection-status';
+
 interface Props {
+  connection: IConnectState
 }
 interface State {
   id: string,
   email: string,
-  password: string
+  password: string,
 }
 
 const background = require('../../../src/features/start/images/background.jpg');
 const personIcon = require('../../../src/features/start/images/login1_person.png');
 const lockIcon = require('../../../src/features/start/images/login1_lock.png');
 
-export default class Login extends Component<Props, State> {
+const mapStateToProps = (state) => {
+  const connection:IConnectState = state.commonAppConnection;
+  return {
+    connection: connection
+  }
+};
+
+
+class _Login extends Component<Props, State> {
 
   constructor(props) {
     super(props);
@@ -34,13 +50,13 @@ export default class Login extends Component<Props, State> {
       this.state.email,
       this.state.password
     );
-    console.log(credentials);
     LoginActions.login(credentials)
   }
   render() {
     return (
       <View style={styles.container}>
         <Image source={background} style={styles.background} resizeMode='stretch' resizeMethod='resize'>
+          <ConnectionStatus/>
           <View style={styles.wrapper}>
 
             <View style={styles.inputWrap}>
@@ -98,3 +114,7 @@ export default class Login extends Component<Props, State> {
     )
   }
 }
+
+
+const Login = connect(mapStateToProps)(_Login);
+export default Login;

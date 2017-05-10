@@ -1,8 +1,7 @@
-import { User } from '../../api';
-
 import { IPayloadAction } from '../../redux-package';
 import { LoginActions } from './login-actions.class';
 import { ILoginState, ILoginActionPayload } from './index'
+import {LoginFunctions} from './login-functions';
 
 export const LOGIN_INITIAL_STATE:ILoginState = {
   neverLoggedIn: true,
@@ -27,7 +26,7 @@ export function loginReducer(
         loggingIn: false,
         loggedIn: true,
         userId: action.payload.user ? action.payload.user._id : (action.payload.userId ? action.payload.userId : state.userId),
-        displayName: User.getDisplayName(action.payload.user),  // OK because it's synchronous
+        displayName: LoginFunctions.getDisplayName(action.payload.user),  // OK because it's synchronous
         user: action.payload.user,
         errorMessage: ''
       };

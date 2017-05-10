@@ -56,3 +56,4 @@ artifacts/
 coverage/
 
 native-packages
+src/env.ts

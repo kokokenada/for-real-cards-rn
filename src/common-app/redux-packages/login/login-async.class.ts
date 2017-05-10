@@ -7,80 +7,83 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/delay';
 import { IPayloadAction, IAppState } from '../../redux-package';
 
-import {User} from '../../api';
-
 import {IDocumentChange} from "../../api";
 import {LoginActions} from "./login-actions.class";
-import {LoginService} from "./login.service";
-import {ILoginState} from "./login.types"
+import {ILoginState, IUser} from "./login-types"
 import {IAppStateCommonApp} from '../index';
+import {ILoginService} from './login-service-interface';
 
 export class LoginAsync {
-  static login = (action$: Observable<IPayloadAction>) => {
+
+  constructor(private loginService:ILoginService) {
+
+  }
+
+  login = (action$: Observable<IPayloadAction>) => {
     return action$
       .filter(({type}) => type === LoginActions.LOGIN_REQUEST)
       .flatMap(({payload}) => {
         return Observable
           .fromPromise(
-            LoginService.login(payload.credentials)
+            this.loginService.login(payload.credentials)
           )
           .do((payloadAction: IPayloadAction) => {
             LoginActions.watchUser();
-            LoginService.watchCurrentUser();
+            this.loginService.watchCurrentUser();
           })
           .catch(error => Observable.of(error));
       });
   };
 
-  static register = (action$: Observable<IPayloadAction>) => {
+  register = (action$: Observable<IPayloadAction>) => {
     return action$
       .filter(({type}) => type === LoginActions.REGISTRATION_REQUEST)
       .flatMap(({payload}) => {
         return Observable
           .fromPromise(
-            LoginService.register(payload.credentials)
+            this.loginService.register(payload.credentials)
           )
           .do((payloadAction: IPayloadAction) => {
             LoginActions.watchUser();
-            LoginService.watchCurrentUser();
+            this.loginService.watchCurrentUser();
           })
           .catch(error => Observable.of(error));
       });
   };
 
 
-  static tempUser = (action$: Observable<IPayloadAction>) => {
+  tempUser = (action$: Observable<IPayloadAction>) => {
     return action$
       .filter(({type}) => type === LoginActions.TEMP_USER_REQUEST)
       .flatMap(({payload}) => {
         return Observable
           .fromPromise(
-            LoginService.createTempUser()
+            this.loginService.createTempUser()
           )
           .do((payloadAction: IPayloadAction) => {
             LoginActions.watchUser();
-            LoginService.watchCurrentUser();
+            this.loginService.watchCurrentUser();
           })
           .catch(error => Observable.of(error));
       });
   };
 
 
-  static logout = (action$: Observable<IPayloadAction>) => {
+  logout = (action$: Observable<IPayloadAction>) => {
     return action$.filter(({type}) => type === LoginActions.LOGOUT_REQUEST)
       .flatMap(({payload}) => {
         return Observable.fromPromise(
-          LoginService.logOut()
+          this.loginService.logOut()
         )
           .catch(error => Observable.of(error));
       });
   };
 
-  static saveUser = (action$: Observable<IPayloadAction>) => {
+  saveUser = (action$: Observable<IPayloadAction>) => {
     return action$.filter(({type}) => type === LoginActions.SAVE_USER_REQUEST)
       .flatMap(({payload}) => {
         return Observable.fromPromise(
-          LoginService.saveUser(payload.user)
+          this.loginService.saveUser(payload.user)
         )
           .catch(error => Observable.of(error));
 
@@ -93,14 +96,14 @@ export class LoginAsync {
    * @param store
    * @returns {Observable<IPayloadAction>}
    */
-  static watchUser = (action$: Observable<IPayloadAction>, store: Store<IAppStateCommonApp>): Observable<IPayloadAction> => {
+  watchUser = (action$: Observable<IPayloadAction>, store: Store<IAppStateCommonApp>): Observable<IPayloadAction> => {
     return action$.filter(({type}) => type === LoginActions.WATCH_USER)
       .flatMap(({payload}) => {
-        return Observable.fromPromise( LoginService.watchCurrentUser() )
+        return Observable.fromPromise( this.loginService.watchCurrentUser() )
           .flatMap(
             ()=>{
-              return LoginService
-                .createUserObserver(LoginService.userId()).map((change: IDocumentChange<User>)=> {
+              return this.loginService
+                .createUserObserver(this.loginService.userId()).map((change: IDocumentChange<IUser>)=> {
                   let loginState: ILoginState = store.getState().loginReducer;
                   if (loginState && loginState.neverLoggedIn) {
                     // Never logged in, yet the current user is populated, must be automatic login

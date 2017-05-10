@@ -1,9 +1,8 @@
-import 'meteor-client';
 import { _ } from 'underscore';
 
-export class User {
-
-  static getDisplayName(user: User) {
+import {IUser} from './login-types';
+export class LoginFunctions {
+  static getDisplayName(user: IUser) {
     if (!user) {
       return 'Not Logged In';
     }
@@ -14,32 +13,27 @@ export class User {
     return user._id;
   }
 
-  static defaultAvatarUrl() {
-    return Meteor.absoluteUrl('default-avatar.png');
-  };
-
-
-  static getAvatarURL(user:User, size:string="thumb"):string {
+  static getAvatarURL(user: IUser, defaultUrl: string, size: string = "thumb"): string {
     if (!user) {
-      return User.defaultAvatarUrl();
+      return defaultUrl;
     }
     let profile = user.profile;
     if (!profile)
-      return User.defaultAvatarUrl();
+      return defaultUrl;
 
     let file = profile['avatar-' + size];
     if (!file) {
       file = profile['avatar-medium'];
     }
     if (!file) {
-      return User.defaultAvatarUrl();
+      return defaultUrl;
     }
     return file;
   }
 
   // Get the initials of the user (from https://github.com/meteor-utilities/avatar/)
 
-  static getInitials(user:User):string {
+  static getInitials(user: IUser): string {
     var initials = '';
     var name = '';
     var parts = [];
@@ -71,36 +65,14 @@ export class User {
     return initials;
   }
 
-
-
-  _id: string;
-  username: string;
-  emails: {
-    address:string;
-    verified?:boolean;
-  }[];
-  profile: {
-    name?: string;
-    "avatar-original"?: string;
-    "avatar-medium"?: string;
-    "avatar-thumb"?: string;
-    firstName?: string;
-    lastName?: string;
-    birthday?: Date;
-    gender?: string;
-    organization?: string;
-    website?: string;
-    bio?: string;
-    country?: {
-      name?: string;
-      code?: string;
+  static currentUserEmail( user:IUser ):string {
+    if (user) {
+      if (user.emails && user.emails.length>0) {
+        return user.emails[0].address;
+      }
     }
-  };
-  // Use this registered_emails field if you are using splendido:meteor-accounts-emails-field / splendido:meteor-accounts-meld
-  registered_emails: any;
-  createdAt: Date;
-  services: any;
-  roles:string[];
-  heartbeat: Date;
-  presence: string;
+    return '';
+  }
+
 }
+
