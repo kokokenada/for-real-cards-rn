@@ -63,7 +63,7 @@ export class LoginServiceFirebase implements ILoginService {
 
   watchCurrentUser():Promise<IPayloadAction> {
     return new Promise((resolve, reject)=>{
-      firebase.auth().onAuthStateChanged(function(user) {
+      this.firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           resolve( transformUser(user));
         } else {

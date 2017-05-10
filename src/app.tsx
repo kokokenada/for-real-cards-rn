@@ -10,7 +10,6 @@ import Register from './features/start/register';
 import View = Animated.View;
 import {ReduxPackages} from './redux-packages';
 import {ReduxPackageCombiner} from './common-app';
-import 'meteor-client';
 import * as firebase from 'firebase';
 
 // Initialize Firebase
@@ -22,7 +21,7 @@ export interface Props {
 }
 export interface State { }
 
-export let reduxPackages = new ReduxPackages();
+export let reduxPackages = new ReduxPackages(firebaseApp);
 
 class HomeScreen extends React.Component<Props, State> {
 
@@ -64,6 +63,3 @@ export class App extends Component<Props, State> {
   )}
 }
 
-Meteor.startup(() => {
-  console.log('Meteor startup called');
-});

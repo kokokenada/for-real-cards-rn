@@ -18,17 +18,29 @@ import {ReduxPackage} from "./redux-package.class";
 import {createEpicMiddleware} from 'redux-observable';
 import {IPayloadAction} from "./index";
 import {Dispatcher} from './dispatcher';
+import {IDispatcher} from './dispatcher-type';
 
 export interface ICombinerOptions {
   consoleLogging?: boolean
 }
 
 export class ReduxPackageCombiner {
-  private static _ngRedux;
+  private static _ngRedux: IDispatcher<IAppState>;
   private static _store;
 
   public static dispatch(action: IPayloadAction) {
     ReduxPackageCombiner._ngRedux.dispatch(action);
+  }
+
+  public static getDispatcher(): IDispatcher<IAppState> {
+    return ReduxPackageCombiner._ngRedux;
+  }
+
+  /**
+   * Resets so it can be reconfigured (only required for tests)
+   */
+  public static reset() {
+    ReduxPackageCombiner.configured = false;
   }
 
   public static getStore() { // Type???
@@ -59,7 +71,7 @@ export class ReduxPackageCombiner {
    * @param options
    */
   static configure(modules: ReduxPackage<IAppState, IPayloadAction>[],
-            ngRedux,
+            ngRedux: IDispatcher<IAppState>,
             options: ICombinerOptions = {
               consoleLogging: false
             }
