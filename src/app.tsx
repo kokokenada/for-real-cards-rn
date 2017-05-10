@@ -14,7 +14,6 @@ import View = Animated.View;
 import styles from './features/start/config/styles'
 import {ReduxPackages} from './redux-packages';
 import {ReduxPackageCombiner} from './common-app';
-import 'meteor-client';
 import * as firebase from 'firebase';
 
 // Initialize Firebase
@@ -67,6 +66,3 @@ export class App extends Component<Props, State> {
   }
 }
 
-Meteor.startup(() => {
-  console.log('Meteor startup called');
-});
