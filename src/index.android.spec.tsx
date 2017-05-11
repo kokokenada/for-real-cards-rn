@@ -1,5 +1,5 @@
 import 'react-native'
-import { App } from './app'
+import { App } from './app';
 import React from 'react'
 import renderer from 'react-test-renderer'
 /*
