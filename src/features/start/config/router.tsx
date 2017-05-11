@@ -3,7 +3,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 
 import StartGame from '../startGame'
 import JoinGame from '../joinGame'
-import HomeScreen from '../../../app'
+import HomeScreen from '../home'
 import Login from '../login'
 import Register from '../register'
 
