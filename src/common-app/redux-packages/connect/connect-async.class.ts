@@ -2,8 +2,11 @@ import { IPayloadAction } from '../../redux-package';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/forkJoin';
 
 import { ConnectActions } from "./connect-actions.class";
 import { IConnectService } from './connect-service-interface';

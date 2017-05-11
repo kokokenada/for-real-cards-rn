@@ -1,6 +1,11 @@
 import {ConnectPackage, LoginPackage, LoginActions, ReduxPackageCombiner} from './common-app';
+
+/* Meteor
 import {ConnectServiceMeteor} from './common-app-meteor';
 import {LoginServiceMeteor} from './common-app-meteor';
+*/
+declare let ConnectServiceMeteor, LoginServiceMeteor;
+
 import {FEATURE_TOGGLE_USE_FIREBASE, featureToggleConfigs} from './feature-toggle.config';
 import {ConnectServiceFirebase} from './common-app-firebase/connect-service-firebase';
 import {LoginServiceFirebase} from './common-app-firebase/login-service-firebase';

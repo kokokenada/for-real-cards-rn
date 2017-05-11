@@ -28,7 +28,7 @@ export class LoginServiceFirebase implements ILoginService {
   }
 
   static defaultAvatarUrl() { // Move this
-    return Meteor.absoluteUrl('default-avatar.png');
+    return //Meteor.absoluteUrl('default-avatar.png');
   };
 
   register(credentials:Credentials):Promise<IPayloadAction> {

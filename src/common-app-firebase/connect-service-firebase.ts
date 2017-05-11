@@ -39,7 +39,7 @@ export class ConnectServiceFirebase implements IConnectService {
   }
 
   disconnect() {
-    Meteor.disconnect();
+    //Meteor.disconnect();
   }
 
 }
