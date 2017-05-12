@@ -1,15 +1,15 @@
 import { Observable } from 'rxjs/Observable';
 import { Store } from "redux";
 import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/delay';
-import { IPayloadAction, IAppState } from '../../redux-package';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
 
-import {IDocumentChange} from "../../api";
+import { IPayloadAction } from 'redux-package';
+
 import {LoginActions} from "./login-actions.class";
-import {ILoginState, IUser} from "./login-types"
 import {IAppStateCommonApp} from '../index';
 import {ILoginService} from './login-service-interface';
 
@@ -29,7 +29,6 @@ export class LoginAsync {
           )
           .do((payloadAction: IPayloadAction) => {
             LoginActions.watchUser();
-            this.loginService.watchCurrentUser();
           })
           .catch(error => Observable.of(error));
       });
@@ -45,7 +44,6 @@ export class LoginAsync {
           )
           .do((payloadAction: IPayloadAction) => {
             LoginActions.watchUser();
-            this.loginService.watchCurrentUser();
           })
           .catch(error => Observable.of(error));
       });
@@ -62,7 +60,6 @@ export class LoginAsync {
           )
           .do((payloadAction: IPayloadAction) => {
             LoginActions.watchUser();
-            this.loginService.watchCurrentUser();
           })
           .catch(error => Observable.of(error));
       });
@@ -91,30 +88,15 @@ export class LoginAsync {
   };
 
   /**
-   * Start watching the currently logged in user
+   * Start watching the currently logged in user and emits login event when it changes
    * @param action$
    * @param store
    * @returns {Observable<IPayloadAction>}
    */
-  watchUser = (action$: Observable<IPayloadAction>, store: Store<IAppStateCommonApp>): Observable<IPayloadAction> => {
-    return action$.filter(({type}) => type === LoginActions.WATCH_USER)
+  watchForAutoLogin = (action$: Observable<IPayloadAction>, store: Store<IAppStateCommonApp>): Observable<IPayloadAction> => {
+    return action$.filter(({type}) => type === LoginActions.WATCH_USER_AUTO_LOGIN)
       .flatMap(({payload}) => {
-        return Observable.fromPromise( this.loginService.watchCurrentUser() )
-          .flatMap(
-            ()=>{
-              return this.loginService
-                .createUserObserver(this.loginService.userId()).map((change: IDocumentChange<IUser>)=> {
-                  let loginState: ILoginState = store.getState().loginReducer;
-                  if (loginState && loginState.neverLoggedIn) {
-                    // Never logged in, yet the current user is populated, must be automatic login
-                    return LoginActions.loginSuccessFactory(change.newDocument, change.newDocument._id, true);
-                  } else {
-                    return LoginActions.changeFactory(change);
-                  }
-                })
-            }
-          )
-          .catch(error => Observable.of(error));
+        return this.loginService.watchForAutoLogin();
       });
   };
 }

@@ -1,5 +1,5 @@
 
-import { ReduxPackage, IAppState, IPayloadAction } from '../../redux-package';
+import { ReduxPackage, IAppState, IPayloadAction } from 'redux-package';
 import { featureToggleReducer } from "./feature-toggle-reducer";
 import { FeatureToggleActions } from './feature-toggle-actions';
 

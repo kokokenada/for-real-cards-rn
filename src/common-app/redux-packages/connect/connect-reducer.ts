@@ -1,5 +1,5 @@
 
-import { IPayloadAction } from '../../redux-package';
+import { IPayloadAction } from 'redux-package';
 import { ConnectActions } from './connect-actions.class';
 import {IConnectState, IConnectActionPayload, INITIAL_STATE_CONNECT} from './connect-types'
 import {LoginActions} from '../login/login-actions.class';

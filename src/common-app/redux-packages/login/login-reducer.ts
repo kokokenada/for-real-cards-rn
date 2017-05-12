@@ -1,4 +1,4 @@
-import { IPayloadAction } from '../../redux-package';
+import { IPayloadAction } from 'redux-package';
 import { LoginActions } from './login-actions.class';
 import { ILoginState, ILoginActionPayload } from './index'
 import {LoginFunctions} from './login-functions';
@@ -50,11 +50,8 @@ export function loginReducer(
           errorMessage: action.error.message
         }
       );
-    case LoginActions.SAVE_USER_RESPONSE:   // Fall through
-    case LoginActions.WATCH_USER_FIRST_READ:
+    case LoginActions.SAVE_USER_RESPONSE:
       return Object.assign({}, state, {user: payload.user});
-    case LoginActions.WATCHED_USER_CHANGED:
-      return Object.assign({}, state, {user: payload.documentChange.newDocument});
     default:
       return state;
   }

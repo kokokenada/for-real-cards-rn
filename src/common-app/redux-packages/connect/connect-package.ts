@@ -1,4 +1,4 @@
-import { ReduxPackage, IAppState, IPayloadAction} from '../../redux-package';
+import { ReduxPackage, IAppState, IPayloadAction} from 'redux-package';
 import { connectReducer } from "./connect-reducer";
 import { ConnectAsync } from "./connect-async.class";
 import { ConnectActions } from "./connect-actions.class";

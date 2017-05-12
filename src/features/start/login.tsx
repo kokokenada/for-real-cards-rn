@@ -11,13 +11,14 @@ import {
   LoginActions
 } from '../../common-app';
 import ConnectionStatus from './connection-status';
+import {LOGIN_PACKAGE_NAME, ILoginState} from '../../common-app';
+import {renderLoginError} from './render-login-error';
 
 interface Props {
   connection: IConnectState
 }
 interface State {
   id: string,
-  email: string,
   password: string,
 }
 
@@ -26,9 +27,9 @@ const personIcon = require('../../../src/features/start/images/login1_person.png
 const lockIcon = require('../../../src/features/start/images/login1_lock.png');
 
 const mapStateToProps = (state) => {
-  const connection:IConnectState = state.commonAppConnection;
   return {
-    connection: connection
+    connection: state.commonAppConnection,
+    [LOGIN_PACKAGE_NAME]: state[LOGIN_PACKAGE_NAME]
   }
 };
 
@@ -37,21 +38,27 @@ class _Login extends Component<Props, State> {
 
   constructor(props) {
     super(props);
-    this.state = {id: '', email: '', password: ''};
+    this.state = {id: '', password: ''};
   }
 
   idChange(text) {
     this.setState({id: text});
   }
+  passwordChange(password) {
+    this.setState({ password })
+  }
   login() {
-    console.log('LOGIN');
     let credentials = new Credentials(
       this.state.id,
-      this.state.email,
+      null,
       this.state.password
     );
-    LoginActions.login(credentials)
+    LoginActions.login(credentials);
   }
+  renderError() {
+    return renderLoginError(this.props[LOGIN_PACKAGE_NAME]);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -81,6 +88,7 @@ class _Login extends Component<Props, State> {
                 placeholder='Password'
                 style={styles.input}
                 secureTextEntry
+                onChangeText={text => this.passwordChange(text)}
               />
             </View>
 
@@ -108,13 +116,12 @@ class _Login extends Component<Props, State> {
               </TouchableOpacity>
             </View>
           </View>
-
+          {this.renderError()}
         </Image>
       </View>
     )
   }
 }
-
 
 const Login = connect(mapStateToProps)(_Login);
 export default Login;

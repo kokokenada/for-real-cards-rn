@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { FeatureToggleActions } from './feature-toggle-actions';
 import { ToggleRouter } from './feature-toggle-router';
-import {ReduxPackageCombiner} from "../../redux-package";
+import {ReduxPackageCombiner} from 'redux-package';
 import {FeatureTogglePackage} from "./feature-toggle-package";
 
 describe('toggle router', () => {

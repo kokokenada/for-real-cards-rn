@@ -92,4 +92,10 @@ export default StyleSheet.create({
     fontSize: 20,
     color: 'red'
   },
+  errorText: {
+    textAlign: 'center',
+    marginBottom: 20,
+    fontSize: 20,
+    color: 'red'
+  }
 });

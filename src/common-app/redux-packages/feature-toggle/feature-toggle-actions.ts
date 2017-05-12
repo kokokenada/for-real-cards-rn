@@ -1,4 +1,4 @@
-import { ReduxPackageCombiner } from "../../redux-package";
+import { ReduxPackageCombiner } from 'redux-package';
 
 import { ToggleUtil } from './feature-toggle-util';
 import {IFeatureToggleConfigSet} from "./feature-toggle-types";

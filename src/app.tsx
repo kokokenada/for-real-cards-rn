@@ -6,7 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import { Navigator } from './features/start/config/router'
 
 import {ReduxPackages} from './redux-packages';
-import {ReduxPackageCombiner} from './common-app';
+import {ReduxPackageCombiner} from 'redux-package';
 import * as firebase from 'firebase';
 
 // Initialize Firebase

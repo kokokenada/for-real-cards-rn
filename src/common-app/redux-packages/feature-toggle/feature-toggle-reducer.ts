@@ -1,4 +1,4 @@
-import { IPayloadAction } from '../../redux-package';
+import { IPayloadAction } from 'redux-package';
 import { FeatureToggleActions } from './feature-toggle-actions';
 import { INITIAL_STATE, fromConfig } from './feature-toggle-initial-state';
 import { IToggleRecord } from './feature-toggle-types';

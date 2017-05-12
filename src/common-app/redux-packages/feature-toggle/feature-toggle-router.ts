@@ -2,11 +2,10 @@
 import { Observable } from 'rxjs';
 import "rxjs/add/operator/pairwise";
 
-import { IAppState } from '../../redux-package';
+import { IAppState, IDispatcher } from 'redux-package';
 import { FeatureToggleActions } from './feature-toggle-actions';
 import { IToggleRecord, IFeatureToggleConfigSet } from './feature-toggle-types';
 import { ToggleUtil, ParseResult } from './feature-toggle-util';
-import {IDispatcher} from '../../redux-package/dispatcher-type';
 
 export class ToggleRouter {
   private toggleConfig$: Observable<IToggleRecord>;

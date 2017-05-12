@@ -1,4 +1,4 @@
-import { IPayloadAction, ReduxPackageCombiner} from "../../redux-package";
+import { IPayloadAction, ReduxPackageCombiner} from 'redux-package';
 
 export class ConnectActions {
   private static prefix = 'CA_CONNECT_';
