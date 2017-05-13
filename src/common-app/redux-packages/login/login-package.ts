@@ -2,7 +2,7 @@
 import { ReduxPackage, IAppState, IPayloadAction } from 'redux-package';
 import { loginReducer } from "./login-reducer";
 import { LoginAsync } from "./login-async.class";
-import { LoginActions } from "./login-actions.class";
+import { LoginActions } from "./login-actions";
 import { ILoginState } from './index';
 import {ILoginService} from './login-service-interface';
 export const LOGIN_PACKAGE_NAME = 'commonAppLoginStatus';

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 
 import { IPayloadAction } from 'redux-package';
 
-import {LoginActions} from "./login-actions.class";
+import {LoginActions} from "./login-actions";
 import {IAppStateCommonApp} from '../index';
 import {ILoginService} from './login-service-interface';
 

@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 
 import {Credentials} from "../common-app/api/services/credentials";
-import {LoginActions} from "../common-app/redux-packages/login/login-actions.class";
+import {LoginActions} from "../common-app/redux-packages/login/login-actions";
 import {IActionError ,IPayloadAction} from 'redux-package';
 import {IDocumentChange } from '../common-app/api';
 import {ILoginService} from '../common-app/redux-packages/login/login-service-interface';

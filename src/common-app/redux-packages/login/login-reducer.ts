@@ -1,5 +1,5 @@
 import { IPayloadAction } from 'redux-package';
-import { LoginActions } from './login-actions.class';
+import { LoginActions } from './login-actions';
 import { ILoginState, ILoginActionPayload } from './index'
 import {LoginFunctions} from './login-functions';
 
