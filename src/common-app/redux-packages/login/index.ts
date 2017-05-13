@@ -2,7 +2,7 @@
 import {IUser} from './login-types';
 export * from './login-package';
 export * from './login-async.class';
-export * from './login-actions.class';
+export * from './login-actions';
 export * from './login-reducer';
 export * from './login-types';
 
