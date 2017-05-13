@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Text, View, StyleSheet, Animated, TextInput, TouchableOpacity} from 'react-native';
 
-import {IConnectState} from '../../common-app';
-import {ConnectActions} from '../../common-app/redux-packages/connect/connect-actions.class';
+import {
+  ConnectActions,
+  IConnectState} from 'common-app';
 import Prompt from 'react-native-prompt';
 
 

@@ -1,4 +1,4 @@
-import {IUser} from '../common-app';
+import {IUser} from 'common-app';
 
 export function transformUser(firebaseUser: firebase.User) : IUser {
     return {

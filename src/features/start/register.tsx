@@ -10,9 +10,13 @@ import {
   TouchableOpacity
 } from 'react-native';
 import styles from './config/styles'
-import { Credentials, ILoginState, LoginActions } from '../../common-app';
+import {
+  Credentials,
+  ILoginState,
+  LoginActions,
+  LOGIN_PACKAGE_NAME
+} from 'common-app';
 import ConnectionStatus from './connection-status';
-import {LOGIN_PACKAGE_NAME} from '../../common-app';
 import {renderLoginError} from './render-login-error';
 
 interface Props {

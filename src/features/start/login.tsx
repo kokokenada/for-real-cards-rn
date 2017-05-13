@@ -8,10 +8,11 @@ import { connect } from 'react-redux';
 import {
   Credentials,
   IConnectState,
-  LoginActions
-} from '../../common-app';
+  LoginActions,
+  LOGIN_PACKAGE_NAME,
+  ILoginState
+} from 'common-app';
 import ConnectionStatus from './connection-status';
-import {LOGIN_PACKAGE_NAME, ILoginState} from '../../common-app';
 import {renderLoginError} from './render-login-error';
 
 interface Props {

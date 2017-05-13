@@ -1,5 +1,5 @@
 import React from 'react';
-import {ILoginState} from '../../common-app';
+import {ILoginState} from 'common-app';
 import {Text, View} from 'react-native';
 import styles from './config/styles'
 

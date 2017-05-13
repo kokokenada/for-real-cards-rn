@@ -1,4 +1,4 @@
-import { IFeatureToggleConfigSet } from './common-app';
+import { IFeatureToggleConfigSet } from 'common-app';
 
 export const FEATURE_TOGGLE_USE_FIREBASE = 'firebase';
 

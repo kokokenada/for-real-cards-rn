@@ -1,4 +1,4 @@
-import {ConnectPackage, LoginPackage, LoginActions} from './common-app';
+import {ConnectPackage, LoginPackage, LoginActions} from 'common-app';
 import { ReduxPackageCombiner } from 'redux-package';
 
 /* Meteor

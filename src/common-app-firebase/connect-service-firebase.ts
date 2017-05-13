@@ -1,5 +1,5 @@
 import { _ } from 'underscore';
-import {IConnectService} from '../common-app/redux-packages/connect/connect-service-interface';
+import {IConnectService} from 'common-app';
 import * as firebase from 'firebase/app';
 import App = firebase.app.App;
 // Make an abstract parent and children that implement specific backend

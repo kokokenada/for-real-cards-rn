@@ -1,14 +1,16 @@
 import { Observable } from 'rxjs';
 
-import {Credentials} from "../common-app/api/services/credentials";
-import {LoginActions} from "../common-app/redux-packages/login/login-actions";
+import {
+  Credentials,
+  IDocumentChange,
+  LoginActions,
+  ILoginService,
+  ILoginActionPayload,
+  IUser
+} from 'common-app';
 import {IActionError ,IPayloadAction} from 'redux-package';
-import {IDocumentChange } from '../common-app/api';
-import {ILoginService} from '../common-app/redux-packages/login/login-service-interface';
-import {IUser} from '../common-app/redux-packages/login/login-types';
 import App = firebase.app.App;
 import {transformUser} from './transform-user';
-import {ILoginActionPayload} from '../common-app/redux-packages/login/index';
 
 export class LoginServiceFirebase implements ILoginService {
   constructor(private firebase: App) {
