@@ -83,4 +83,12 @@ export class LoginServiceFirebase implements ILoginService {
   watchForAutoLogin(): Observable<ILoginActionPayload> {
     return Observable.never();
   }
+
+  watchCurrentUser(): Observable<ILoginActionPayload> {
+    return Observable.never();
+  }
+
+  defaultAvatarUrl(): string {
+    return 'default-avatar.png';
+  }
 }

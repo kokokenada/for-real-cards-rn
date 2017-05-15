@@ -39,7 +39,5 @@ console.log(featureToggleConfigs)
         {consoleLogging: true}
       );
     }
-    LoginActions.watchUser(); // for auto login
-
   }
 }

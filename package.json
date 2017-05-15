@@ -17,7 +17,7 @@
     "start:android": "npm run build && concurrently -r 'npm run watch' 'react-native run-android'"
   },
   "dependencies": {
-    "common-app": "0.0.1",
+    "common-app": "0.0.3",
     "firebase": "^3.9.0",
     "immutable": "3.8.1",
     "react": "16.0.0-alpha.6",
