@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 
-import { Navigator } from './features/start/config/router'
 
-import {ReduxPackages} from './redux-packages';
+import {ReduxPackages} from './redux-packages/redux-packages';
 import {ReduxPackageCombiner} from 'redux-package';
+
+import AppWithNavigationState  from './redux-packages/navigation/app-with-nav-state'
+
 import * as firebase from 'firebase';
 
 // Initialize Firebase
@@ -25,7 +27,7 @@ export class App extends Component<Props, State> {
   render() {
     return (
       <Provider store={ReduxPackageCombiner.getStore()}>
-        <Navigator/>
+        <AppWithNavigationState />
       </Provider>
     )
   }

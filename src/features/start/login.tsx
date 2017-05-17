@@ -1,5 +1,6 @@
 
 import styles from './config/styles'
+import { NavigationActions } from 'react-navigation';
 
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
@@ -16,8 +17,12 @@ import ConnectionStatus from './connection-status';
 import {renderLoginError} from './render-login-error';
 
 interface Props {
-  connection: IConnectState
+  connection: IConnectState,
+  login: ILoginState,
+  navigation:any,
+  dispatch: any,
 }
+
 interface State {
   id: string,
   password: string,
@@ -30,12 +35,12 @@ const lockIcon = require('../../../src/features/start/images/login1_lock.png');
 const mapStateToProps = (state) => {
   return {
     connection: state.commonAppConnection,
-    [LOGIN_PACKAGE_NAME]: state[LOGIN_PACKAGE_NAME]
+    login: state[LOGIN_PACKAGE_NAME],
   }
 };
 
 
-class _Login extends Component<Props, State> {
+class Login extends Component<Props, State> {
 
   constructor(props) {
     super(props);
@@ -57,7 +62,7 @@ class _Login extends Component<Props, State> {
     LoginActions.login(credentials);
   }
   renderError() {
-    return renderLoginError(this.props[LOGIN_PACKAGE_NAME]);
+    return renderLoginError(this.props.login);
   }
 
   render() {
@@ -99,24 +104,23 @@ class _Login extends Component<Props, State> {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity activeOpacity={.5}>
+            <TouchableOpacity onPress={() => this.login()} activeOpacity={.5}>
               <View style={styles.button}>
-                <Text onPress={() => this.login()} style={styles.buttonText}>Sign In</Text>
+                <Text  style={styles.buttonText}>Sign In</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.dispatch(
+              NavigationActions.navigate({ routeName: 'Register' })
+            )}
+              activeOpacity={.5}>
+              <View>
+                <Text style={styles.accountText}>Don't have an account?</Text>
+                <Text style={styles.signupLinkText}>Sign Up</Text>
               </View>
             </TouchableOpacity>
 
           </View>
 
-          <View style={styles.container}>
-            <View style={styles.signupWrap}>
-              <Text style={styles.accountText}>Don't have an account?</Text>
-              <TouchableOpacity activeOpacity={.5}>
-                <View>
-                  <Text style={styles.signupLinkText}>Sign Up</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
           {this.renderError()}
         </Image>
       </View>
@@ -124,5 +128,4 @@ class _Login extends Component<Props, State> {
   }
 }
 
-const Login = connect(mapStateToProps)(_Login);
-export default Login;
+export default connect(mapStateToProps)(Login);

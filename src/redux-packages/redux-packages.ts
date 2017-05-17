@@ -7,22 +7,22 @@ import {LoginServiceMeteor} from './common-app-meteor';
 */
 declare let ConnectServiceMeteor, LoginServiceMeteor;
 
-import {FEATURE_TOGGLE_USE_FIREBASE, featureToggleConfigs} from './feature-toggle.config';
-import {ConnectServiceFirebase} from './common-app-firebase/connect-service-firebase';
-import {LoginServiceFirebase} from './common-app-firebase/login-service-firebase';
+import { FEATURE_TOGGLE_USE_FIREBASE, featureToggleConfigs } from '../feature-toggle.config';
+import { ConnectServiceFirebase } from '../common-app-firebase';
+import { LoginServiceFirebase } from '../common-app-firebase';
+import { NavigationPackage } from './index';
 import App = firebase.app.App;
 
 export class ReduxPackages {
 
   constructor(private firebase: App) {
-console.log(featureToggleConfigs)
     if (featureToggleConfigs[FEATURE_TOGGLE_USE_FIREBASE].setting) {
-      console.log('firebase')
       const connectService = new ConnectServiceFirebase(firebase);
       const loginService = new LoginServiceFirebase(firebase);
       ReduxPackageCombiner.configure([
           new LoginPackage(loginService),
-          new ConnectPackage(connectService)
+          new ConnectPackage(connectService),
+          new NavigationPackage()
         ],
         null,
         {consoleLogging: true}
